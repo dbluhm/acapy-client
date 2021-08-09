@@ -11,41 +11,41 @@ T = TypeVar("T", bound="TAAAccept")
 class TAAAccept:
     """ """
 
-    version: Union[Unset, str] = UNSET
-    text: Union[Unset, str] = UNSET
     mechanism: Union[Unset, str] = UNSET
+    text: Union[Unset, str] = UNSET
+    version: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        version = self.version
-        text = self.text
         mechanism = self.mechanism
+        text = self.text
+        version = self.version
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if version is not UNSET:
-            field_dict["version"] = version
-        if text is not UNSET:
-            field_dict["text"] = text
         if mechanism is not UNSET:
             field_dict["mechanism"] = mechanism
+        if text is not UNSET:
+            field_dict["text"] = text
+        if version is not UNSET:
+            field_dict["version"] = version
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        version = d.pop("version", UNSET)
+        mechanism = d.pop("mechanism", UNSET)
 
         text = d.pop("text", UNSET)
 
-        mechanism = d.pop("mechanism", UNSET)
+        version = d.pop("version", UNSET)
 
         taa_accept = cls(
-            version=version,
-            text=text,
             mechanism=mechanism,
+            text=text,
+            version=version,
         )
 
         taa_accept.additional_properties = d

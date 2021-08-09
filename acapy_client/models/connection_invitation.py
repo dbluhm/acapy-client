@@ -11,49 +11,49 @@ T = TypeVar("T", bound="ConnectionInvitation")
 class ConnectionInvitation:
     """ """
 
-    routing_keys: Union[Unset, List[str]] = UNSET
-    image_url: Union[Unset, None, str] = UNSET
+    id: Union[Unset, str] = UNSET
     type: Union[Unset, str] = UNSET
+    did: Union[Unset, str] = UNSET
+    image_url: Union[Unset, None, str] = UNSET
     label: Union[Unset, str] = UNSET
     recipient_keys: Union[Unset, List[str]] = UNSET
-    did: Union[Unset, str] = UNSET
-    id: Union[Unset, str] = UNSET
+    routing_keys: Union[Unset, List[str]] = UNSET
     service_endpoint: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        routing_keys: Union[Unset, List[str]] = UNSET
-        if not isinstance(self.routing_keys, Unset):
-            routing_keys = self.routing_keys
-
-        image_url = self.image_url
+        id = self.id
         type = self.type
+        did = self.did
+        image_url = self.image_url
         label = self.label
         recipient_keys: Union[Unset, List[str]] = UNSET
         if not isinstance(self.recipient_keys, Unset):
             recipient_keys = self.recipient_keys
 
-        did = self.did
-        id = self.id
+        routing_keys: Union[Unset, List[str]] = UNSET
+        if not isinstance(self.routing_keys, Unset):
+            routing_keys = self.routing_keys
+
         service_endpoint = self.service_endpoint
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if routing_keys is not UNSET:
-            field_dict["routingKeys"] = routing_keys
-        if image_url is not UNSET:
-            field_dict["imageUrl"] = image_url
+        if id is not UNSET:
+            field_dict["@id"] = id
         if type is not UNSET:
             field_dict["@type"] = type
+        if did is not UNSET:
+            field_dict["did"] = did
+        if image_url is not UNSET:
+            field_dict["imageUrl"] = image_url
         if label is not UNSET:
             field_dict["label"] = label
         if recipient_keys is not UNSET:
             field_dict["recipientKeys"] = recipient_keys
-        if did is not UNSET:
-            field_dict["did"] = did
-        if id is not UNSET:
-            field_dict["@id"] = id
+        if routing_keys is not UNSET:
+            field_dict["routingKeys"] = routing_keys
         if service_endpoint is not UNSET:
             field_dict["serviceEndpoint"] = service_endpoint
 
@@ -62,30 +62,30 @@ class ConnectionInvitation:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        routing_keys = cast(List[str], d.pop("routingKeys", UNSET))
-
-        image_url = d.pop("imageUrl", UNSET)
+        id = d.pop("@id", UNSET)
 
         type = d.pop("@type", UNSET)
+
+        did = d.pop("did", UNSET)
+
+        image_url = d.pop("imageUrl", UNSET)
 
         label = d.pop("label", UNSET)
 
         recipient_keys = cast(List[str], d.pop("recipientKeys", UNSET))
 
-        did = d.pop("did", UNSET)
-
-        id = d.pop("@id", UNSET)
+        routing_keys = cast(List[str], d.pop("routingKeys", UNSET))
 
         service_endpoint = d.pop("serviceEndpoint", UNSET)
 
         connection_invitation = cls(
-            routing_keys=routing_keys,
-            image_url=image_url,
+            id=id,
             type=type,
+            did=did,
+            image_url=image_url,
             label=label,
             recipient_keys=recipient_keys,
-            did=did,
-            id=id,
+            routing_keys=routing_keys,
             service_endpoint=service_endpoint,
         )
 

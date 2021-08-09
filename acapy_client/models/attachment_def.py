@@ -2,6 +2,7 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
+from ..models.attachment_def_type import AttachmentDefType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AttachmentDef")
@@ -12,12 +13,14 @@ class AttachmentDef:
     """ """
 
     id: Union[Unset, str] = UNSET
-    type: Union[Unset, str] = UNSET
+    type: Union[Unset, AttachmentDefType] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
-        type = self.type
+        type: Union[Unset, str] = UNSET
+        if not isinstance(self.type, Unset):
+            type = self.type.value
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -34,7 +37,12 @@ class AttachmentDef:
         d = src_dict.copy()
         id = d.pop("id", UNSET)
 
-        type = d.pop("type", UNSET)
+        _type = d.pop("type", UNSET)
+        type: Union[Unset, AttachmentDefType]
+        if isinstance(_type, Unset):
+            type = UNSET
+        else:
+            type = AttachmentDefType(_type)
 
         attachment_def = cls(
             id=id,

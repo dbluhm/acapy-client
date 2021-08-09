@@ -13,15 +13,15 @@ class V10PresentationCreateRequestRequest:
     """ """
 
     proof_request: IndyProofRequest
-    trace: Union[Unset, bool] = UNSET
     comment: Union[Unset, None, str] = UNSET
+    trace: Union[Unset, bool] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         proof_request = self.proof_request.to_dict()
 
-        trace = self.trace
         comment = self.comment
+        trace = self.trace
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -30,10 +30,10 @@ class V10PresentationCreateRequestRequest:
                 "proof_request": proof_request,
             }
         )
-        if trace is not UNSET:
-            field_dict["trace"] = trace
         if comment is not UNSET:
             field_dict["comment"] = comment
+        if trace is not UNSET:
+            field_dict["trace"] = trace
 
         return field_dict
 
@@ -42,14 +42,14 @@ class V10PresentationCreateRequestRequest:
         d = src_dict.copy()
         proof_request = IndyProofRequest.from_dict(d.pop("proof_request"))
 
-        trace = d.pop("trace", UNSET)
-
         comment = d.pop("comment", UNSET)
+
+        trace = d.pop("trace", UNSET)
 
         v10_presentation_create_request_request = cls(
             proof_request=proof_request,
-            trace=trace,
             comment=comment,
+            trace=trace,
         )
 
         v10_presentation_create_request_request.additional_properties = d

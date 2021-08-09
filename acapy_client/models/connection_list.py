@@ -2,7 +2,7 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
-from ..models.connection_record import ConnectionRecord
+from ..models.conn_record import ConnRecord
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ConnectionList")
@@ -12,7 +12,7 @@ T = TypeVar("T", bound="ConnectionList")
 class ConnectionList:
     """ """
 
-    results: Union[Unset, List[ConnectionRecord]] = UNSET
+    results: Union[Unset, List[ConnRecord]] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -38,7 +38,7 @@ class ConnectionList:
         results = []
         _results = d.pop("results", UNSET)
         for results_item_data in _results or []:
-            results_item = ConnectionRecord.from_dict(results_item_data)
+            results_item = ConnRecord.from_dict(results_item_data)
 
             results.append(results_item)
 

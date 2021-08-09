@@ -1,8 +1,9 @@
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import httpx
 
 from ...client import Client
+from ...models.connection_module_response import ConnectionModuleResponse
 from ...types import Response
 
 
@@ -25,12 +26,20 @@ def _get_kwargs(
     }
 
 
-def _build_response(*, response: httpx.Response) -> Response[Any]:
+def _parse_response(*, response: httpx.Response) -> Optional[ConnectionModuleResponse]:
+    if response.status_code == 200:
+        response_200 = ConnectionModuleResponse.from_dict(response.json())
+
+        return response_200
+    return None
+
+
+def _build_response(*, response: httpx.Response) -> Response[ConnectionModuleResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,
         headers=response.headers,
-        parsed=None,
+        parsed=_parse_response(response=response),
     )
 
 
@@ -39,7 +48,7 @@ def sync_detailed(
     client: Client,
     conn_id: str,
     ref_id: str,
-) -> Response[Any]:
+) -> Response[ConnectionModuleResponse]:
     kwargs = _get_kwargs(
         client=client,
         conn_id=conn_id,
@@ -53,12 +62,27 @@ def sync_detailed(
     return _build_response(response=response)
 
 
+def sync(
+    *,
+    client: Client,
+    conn_id: str,
+    ref_id: str,
+) -> Optional[ConnectionModuleResponse]:
+    """ """
+
+    return sync_detailed(
+        client=client,
+        conn_id=conn_id,
+        ref_id=ref_id,
+    ).parsed
+
+
 async def asyncio_detailed(
     *,
     client: Client,
     conn_id: str,
     ref_id: str,
-) -> Response[Any]:
+) -> Response[ConnectionModuleResponse]:
     kwargs = _get_kwargs(
         client=client,
         conn_id=conn_id,
@@ -69,3 +93,20 @@ async def asyncio_detailed(
         response = await _client.post(**kwargs)
 
     return _build_response(response=response)
+
+
+async def asyncio(
+    *,
+    client: Client,
+    conn_id: str,
+    ref_id: str,
+) -> Optional[ConnectionModuleResponse]:
+    """ """
+
+    return (
+        await asyncio_detailed(
+            client=client,
+            conn_id=conn_id,
+            ref_id=ref_id,
+        )
+    ).parsed

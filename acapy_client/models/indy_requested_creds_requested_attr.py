@@ -11,42 +11,36 @@ T = TypeVar("T", bound="IndyRequestedCredsRequestedAttr")
 class IndyRequestedCredsRequestedAttr:
     """ """
 
-    revealed: bool
     cred_id: str
-    timestamp: Union[Unset, int] = UNSET
+    revealed: Union[Unset, bool] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        revealed = self.revealed
         cred_id = self.cred_id
-        timestamp = self.timestamp
+        revealed = self.revealed
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "revealed": revealed,
                 "cred_id": cred_id,
             }
         )
-        if timestamp is not UNSET:
-            field_dict["timestamp"] = timestamp
+        if revealed is not UNSET:
+            field_dict["revealed"] = revealed
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        revealed = d.pop("revealed")
-
         cred_id = d.pop("cred_id")
 
-        timestamp = d.pop("timestamp", UNSET)
+        revealed = d.pop("revealed", UNSET)
 
         indy_requested_creds_requested_attr = cls(
-            revealed=revealed,
             cred_id=cred_id,
-            timestamp=timestamp,
+            revealed=revealed,
         )
 
         indy_requested_creds_requested_attr.additional_properties = d

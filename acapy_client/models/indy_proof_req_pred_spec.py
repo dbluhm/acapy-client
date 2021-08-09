@@ -14,18 +14,18 @@ T = TypeVar("T", bound="IndyProofReqPredSpec")
 class IndyProofReqPredSpec:
     """ """
 
-    p_value: int
-    p_type: IndyProofReqPredSpecPType
     name: str
+    p_type: IndyProofReqPredSpecPType
+    p_value: int
     non_revoked: Union[Unset, IndyProofReqNonRevoked] = UNSET
     restrictions: Union[Unset, List[IndyProofReqPredSpecRestrictions]] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        p_value = self.p_value
+        name = self.name
         p_type = self.p_type.value
 
-        name = self.name
+        p_value = self.p_value
         non_revoked: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.non_revoked, Unset):
             non_revoked = self.non_revoked.to_dict()
@@ -42,9 +42,9 @@ class IndyProofReqPredSpec:
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "p_value": p_value,
-                "p_type": p_type,
                 "name": name,
+                "p_type": p_type,
+                "p_value": p_value,
             }
         )
         if non_revoked is not UNSET:
@@ -57,11 +57,11 @@ class IndyProofReqPredSpec:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        p_value = d.pop("p_value")
+        name = d.pop("name")
 
         p_type = IndyProofReqPredSpecPType(d.pop("p_type"))
 
-        name = d.pop("name")
+        p_value = d.pop("p_value")
 
         _non_revoked = d.pop("non_revoked", UNSET)
         non_revoked: Union[Unset, IndyProofReqNonRevoked]
@@ -78,9 +78,9 @@ class IndyProofReqPredSpec:
             restrictions.append(restrictions_item)
 
         indy_proof_req_pred_spec = cls(
-            p_value=p_value,
-            p_type=p_type,
             name=name,
+            p_type=p_type,
+            p_value=p_value,
             non_revoked=non_revoked,
             restrictions=restrictions,
         )

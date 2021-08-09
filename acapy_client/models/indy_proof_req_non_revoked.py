@@ -1,8 +1,6 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, List, Type, TypeVar
 
 import attr
-
-from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="IndyProofReqNonRevoked")
 
@@ -11,33 +9,28 @@ T = TypeVar("T", bound="IndyProofReqNonRevoked")
 class IndyProofReqNonRevoked:
     """ """
 
-    from_: Union[Unset, int] = UNSET
-    to: Union[Unset, int] = UNSET
+    to: int
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        from_ = self.from_
         to = self.to
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
-        if from_ is not UNSET:
-            field_dict["from"] = from_
-        if to is not UNSET:
-            field_dict["to"] = to
+        field_dict.update(
+            {
+                "to": to,
+            }
+        )
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        from_ = d.pop("from", UNSET)
-
-        to = d.pop("to", UNSET)
+        to = d.pop("to")
 
         indy_proof_req_non_revoked = cls(
-            from_=from_,
             to=to,
         )
 

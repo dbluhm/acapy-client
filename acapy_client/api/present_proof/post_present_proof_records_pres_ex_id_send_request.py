@@ -3,8 +3,8 @@ from typing import Any, Dict, Optional
 import httpx
 
 from ...client import Client
+from ...models.admin_api_message_tracing import AdminAPIMessageTracing
 from ...models.v10_presentation_exchange import V10PresentationExchange
-from ...models.v10_presentation_send_request_request import V10PresentationSendRequestRequest
 from ...types import Response
 
 
@@ -12,7 +12,7 @@ def _get_kwargs(
     *,
     client: Client,
     pres_ex_id: str,
-    json_body: V10PresentationSendRequestRequest,
+    json_body: AdminAPIMessageTracing,
 ) -> Dict[str, Any]:
     url = "{}/present-proof/records/{pres_ex_id}/send-request".format(client.base_url, pres_ex_id=pres_ex_id)
 
@@ -51,7 +51,7 @@ def sync_detailed(
     *,
     client: Client,
     pres_ex_id: str,
-    json_body: V10PresentationSendRequestRequest,
+    json_body: AdminAPIMessageTracing,
 ) -> Response[V10PresentationExchange]:
     kwargs = _get_kwargs(
         client=client,
@@ -70,7 +70,7 @@ def sync(
     *,
     client: Client,
     pres_ex_id: str,
-    json_body: V10PresentationSendRequestRequest,
+    json_body: AdminAPIMessageTracing,
 ) -> Optional[V10PresentationExchange]:
     """ """
 
@@ -85,7 +85,7 @@ async def asyncio_detailed(
     *,
     client: Client,
     pres_ex_id: str,
-    json_body: V10PresentationSendRequestRequest,
+    json_body: AdminAPIMessageTracing,
 ) -> Response[V10PresentationExchange]:
     kwargs = _get_kwargs(
         client=client,
@@ -103,7 +103,7 @@ async def asyncio(
     *,
     client: Client,
     pres_ex_id: str,
-    json_body: V10PresentationSendRequestRequest,
+    json_body: AdminAPIMessageTracing,
 ) -> Optional[V10PresentationExchange]:
     """ """
 

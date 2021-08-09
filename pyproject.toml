@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "acapy-client"
-version = "v0.5.4"
+version = "v0.6.0"
 description = "A client library for accessing Aries Cloud Agent"
 
 authors = []

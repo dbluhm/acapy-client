@@ -4,6 +4,7 @@ import httpx
 
 from ...client import Client
 from ...models.did_list import DIDList
+from ...models.get_wallet_did_posture import GetWalletDidPosture
 from ...types import UNSET, Response, Unset
 
 
@@ -11,7 +12,7 @@ def _get_kwargs(
     *,
     client: Client,
     did: Union[Unset, str] = UNSET,
-    public: Union[Unset, bool] = UNSET,
+    posture: Union[Unset, GetWalletDidPosture] = UNSET,
     verkey: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
     url = "{}/wallet/did".format(client.base_url)
@@ -19,9 +20,13 @@ def _get_kwargs(
     headers: Dict[str, Any] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    json_posture: Union[Unset, str] = UNSET
+    if not isinstance(posture, Unset):
+        json_posture = posture.value
+
     params: Dict[str, Any] = {
         "did": did,
-        "public": public,
+        "posture": json_posture,
         "verkey": verkey,
     }
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
@@ -56,13 +61,13 @@ def sync_detailed(
     *,
     client: Client,
     did: Union[Unset, str] = UNSET,
-    public: Union[Unset, bool] = UNSET,
+    posture: Union[Unset, GetWalletDidPosture] = UNSET,
     verkey: Union[Unset, str] = UNSET,
 ) -> Response[DIDList]:
     kwargs = _get_kwargs(
         client=client,
         did=did,
-        public=public,
+        posture=posture,
         verkey=verkey,
     )
 
@@ -77,7 +82,7 @@ def sync(
     *,
     client: Client,
     did: Union[Unset, str] = UNSET,
-    public: Union[Unset, bool] = UNSET,
+    posture: Union[Unset, GetWalletDidPosture] = UNSET,
     verkey: Union[Unset, str] = UNSET,
 ) -> Optional[DIDList]:
     """ """
@@ -85,7 +90,7 @@ def sync(
     return sync_detailed(
         client=client,
         did=did,
-        public=public,
+        posture=posture,
         verkey=verkey,
     ).parsed
 
@@ -94,13 +99,13 @@ async def asyncio_detailed(
     *,
     client: Client,
     did: Union[Unset, str] = UNSET,
-    public: Union[Unset, bool] = UNSET,
+    posture: Union[Unset, GetWalletDidPosture] = UNSET,
     verkey: Union[Unset, str] = UNSET,
 ) -> Response[DIDList]:
     kwargs = _get_kwargs(
         client=client,
         did=did,
-        public=public,
+        posture=posture,
         verkey=verkey,
     )
 
@@ -114,7 +119,7 @@ async def asyncio(
     *,
     client: Client,
     did: Union[Unset, str] = UNSET,
-    public: Union[Unset, bool] = UNSET,
+    posture: Union[Unset, GetWalletDidPosture] = UNSET,
     verkey: Union[Unset, str] = UNSET,
 ) -> Optional[DIDList]:
     """ """
@@ -123,7 +128,7 @@ async def asyncio(
         await asyncio_detailed(
             client=client,
             did=did,
-            public=public,
+            posture=posture,
             verkey=verkey,
         )
     ).parsed

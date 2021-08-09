@@ -11,20 +11,21 @@ T = TypeVar("T", bound="SchemaSendResults")
 class SchemaSendResults:
     """ """
 
-    schema_id: str
     schema: SchemaSendResultsSchema
+    schema_id: str
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        schema_id = self.schema_id
         schema = self.schema.to_dict()
+
+        schema_id = self.schema_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "schema_id": schema_id,
                 "schema": schema,
+                "schema_id": schema_id,
             }
         )
 
@@ -33,13 +34,13 @@ class SchemaSendResults:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        schema_id = d.pop("schema_id")
-
         schema = SchemaSendResultsSchema.from_dict(d.pop("schema"))
 
+        schema_id = d.pop("schema_id")
+
         schema_send_results = cls(
-            schema_id=schema_id,
             schema=schema,
+            schema_id=schema_id,
         )
 
         schema_send_results.additional_properties = d

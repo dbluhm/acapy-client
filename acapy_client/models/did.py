@@ -2,6 +2,7 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
+from ..models.did_posture import DIDPosture
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="DID")
@@ -11,23 +12,26 @@ T = TypeVar("T", bound="DID")
 class DID:
     """ """
 
-    public: Union[Unset, bool] = UNSET
     did: Union[Unset, str] = UNSET
+    posture: Union[Unset, DIDPosture] = UNSET
     verkey: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        public = self.public
         did = self.did
+        posture: Union[Unset, str] = UNSET
+        if not isinstance(self.posture, Unset):
+            posture = self.posture.value
+
         verkey = self.verkey
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if public is not UNSET:
-            field_dict["public"] = public
         if did is not UNSET:
             field_dict["did"] = did
+        if posture is not UNSET:
+            field_dict["posture"] = posture
         if verkey is not UNSET:
             field_dict["verkey"] = verkey
 
@@ -36,15 +40,20 @@ class DID:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        public = d.pop("public", UNSET)
-
         did = d.pop("did", UNSET)
+
+        _posture = d.pop("posture", UNSET)
+        posture: Union[Unset, DIDPosture]
+        if isinstance(_posture, Unset):
+            posture = UNSET
+        else:
+            posture = DIDPosture(_posture)
 
         verkey = d.pop("verkey", UNSET)
 
         did = cls(
-            public=public,
             did=did,
+            posture=posture,
             verkey=verkey,
         )
 

@@ -15,8 +15,8 @@ class V10CredentialOfferRequest:
     connection_id: str
     cred_def_id: str
     credential_preview: CredentialPreview
-    auto_remove: Union[Unset, bool] = UNSET
     auto_issue: Union[Unset, bool] = UNSET
+    auto_remove: Union[Unset, bool] = UNSET
     comment: Union[Unset, None, str] = UNSET
     trace: Union[Unset, bool] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
@@ -26,8 +26,8 @@ class V10CredentialOfferRequest:
         cred_def_id = self.cred_def_id
         credential_preview = self.credential_preview.to_dict()
 
-        auto_remove = self.auto_remove
         auto_issue = self.auto_issue
+        auto_remove = self.auto_remove
         comment = self.comment
         trace = self.trace
 
@@ -40,10 +40,10 @@ class V10CredentialOfferRequest:
                 "credential_preview": credential_preview,
             }
         )
-        if auto_remove is not UNSET:
-            field_dict["auto_remove"] = auto_remove
         if auto_issue is not UNSET:
             field_dict["auto_issue"] = auto_issue
+        if auto_remove is not UNSET:
+            field_dict["auto_remove"] = auto_remove
         if comment is not UNSET:
             field_dict["comment"] = comment
         if trace is not UNSET:
@@ -60,9 +60,9 @@ class V10CredentialOfferRequest:
 
         credential_preview = CredentialPreview.from_dict(d.pop("credential_preview"))
 
-        auto_remove = d.pop("auto_remove", UNSET)
-
         auto_issue = d.pop("auto_issue", UNSET)
+
+        auto_remove = d.pop("auto_remove", UNSET)
 
         comment = d.pop("comment", UNSET)
 
@@ -72,8 +72,8 @@ class V10CredentialOfferRequest:
             connection_id=connection_id,
             cred_def_id=cred_def_id,
             credential_preview=credential_preview,
-            auto_remove=auto_remove,
             auto_issue=auto_issue,
+            auto_remove=auto_remove,
             comment=comment,
             trace=trace,
         )

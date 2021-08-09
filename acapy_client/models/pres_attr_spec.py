@@ -14,16 +14,16 @@ class PresAttrSpec:
     name: str
     cred_def_id: Union[Unset, str] = UNSET
     mime_type: Union[Unset, str] = UNSET
-    value: Union[Unset, str] = UNSET
     referent: Union[Unset, str] = UNSET
+    value: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
         cred_def_id = self.cred_def_id
         mime_type = self.mime_type
-        value = self.value
         referent = self.referent
+        value = self.value
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -36,10 +36,10 @@ class PresAttrSpec:
             field_dict["cred_def_id"] = cred_def_id
         if mime_type is not UNSET:
             field_dict["mime-type"] = mime_type
-        if value is not UNSET:
-            field_dict["value"] = value
         if referent is not UNSET:
             field_dict["referent"] = referent
+        if value is not UNSET:
+            field_dict["value"] = value
 
         return field_dict
 
@@ -52,16 +52,16 @@ class PresAttrSpec:
 
         mime_type = d.pop("mime-type", UNSET)
 
-        value = d.pop("value", UNSET)
-
         referent = d.pop("referent", UNSET)
+
+        value = d.pop("value", UNSET)
 
         pres_attr_spec = cls(
             name=name,
             cred_def_id=cred_def_id,
             mime_type=mime_type,
-            value=value,
             referent=referent,
+            value=value,
         )
 
         pres_attr_spec.additional_properties = d

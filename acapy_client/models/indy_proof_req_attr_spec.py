@@ -13,18 +13,18 @@ T = TypeVar("T", bound="IndyProofReqAttrSpec")
 class IndyProofReqAttrSpec:
     """ """
 
-    names: Union[Unset, List[str]] = UNSET
     name: Union[Unset, str] = UNSET
+    names: Union[Unset, List[str]] = UNSET
     non_revoked: Union[Unset, IndyProofReqNonRevoked] = UNSET
     restrictions: Union[Unset, List[IndyProofReqAttrSpecRestrictionsItem]] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        name = self.name
         names: Union[Unset, List[str]] = UNSET
         if not isinstance(self.names, Unset):
             names = self.names
 
-        name = self.name
         non_revoked: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.non_revoked, Unset):
             non_revoked = self.non_revoked.to_dict()
@@ -40,10 +40,10 @@ class IndyProofReqAttrSpec:
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if names is not UNSET:
-            field_dict["names"] = names
         if name is not UNSET:
             field_dict["name"] = name
+        if names is not UNSET:
+            field_dict["names"] = names
         if non_revoked is not UNSET:
             field_dict["non_revoked"] = non_revoked
         if restrictions is not UNSET:
@@ -54,9 +54,9 @@ class IndyProofReqAttrSpec:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        names = cast(List[str], d.pop("names", UNSET))
-
         name = d.pop("name", UNSET)
+
+        names = cast(List[str], d.pop("names", UNSET))
 
         _non_revoked = d.pop("non_revoked", UNSET)
         non_revoked: Union[Unset, IndyProofReqNonRevoked]
@@ -73,8 +73,8 @@ class IndyProofReqAttrSpec:
             restrictions.append(restrictions_item)
 
         indy_proof_req_attr_spec = cls(
-            names=names,
             name=name,
+            names=names,
             non_revoked=non_revoked,
             restrictions=restrictions,
         )

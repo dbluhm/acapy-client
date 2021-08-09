@@ -14,14 +14,13 @@ T = TypeVar("T", bound="TAAInfo")
 class TAAInfo:
     """ """
 
-    taa_required: Union[Unset, bool] = UNSET
     aml_record: Union[Unset, AMLRecord] = UNSET
     taa_accepted: Union[Unset, TAAAcceptance] = UNSET
     taa_record: Union[Unset, TAARecord] = UNSET
+    taa_required: Union[Unset, bool] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        taa_required = self.taa_required
         aml_record: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.aml_record, Unset):
             aml_record = self.aml_record.to_dict()
@@ -34,25 +33,25 @@ class TAAInfo:
         if not isinstance(self.taa_record, Unset):
             taa_record = self.taa_record.to_dict()
 
+        taa_required = self.taa_required
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if taa_required is not UNSET:
-            field_dict["taa_required"] = taa_required
         if aml_record is not UNSET:
             field_dict["aml_record"] = aml_record
         if taa_accepted is not UNSET:
             field_dict["taa_accepted"] = taa_accepted
         if taa_record is not UNSET:
             field_dict["taa_record"] = taa_record
+        if taa_required is not UNSET:
+            field_dict["taa_required"] = taa_required
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        taa_required = d.pop("taa_required", UNSET)
-
         _aml_record = d.pop("aml_record", UNSET)
         aml_record: Union[Unset, AMLRecord]
         if isinstance(_aml_record, Unset):
@@ -74,11 +73,13 @@ class TAAInfo:
         else:
             taa_record = TAARecord.from_dict(_taa_record)
 
+        taa_required = d.pop("taa_required", UNSET)
+
         taa_info = cls(
-            taa_required=taa_required,
             aml_record=aml_record,
             taa_accepted=taa_accepted,
             taa_record=taa_record,
+            taa_required=taa_required,
         )
 
         taa_info.additional_properties = d
