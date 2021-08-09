@@ -85,11 +85,11 @@ class OpenAPICleaner:
         self.fix_content_types(value)
 
 
-def merge_operation_ids():
+def merge_overrides():
     with open(
         "/app/openapi.yml"
     ) as openapi_file, open(
-        "/app/operation-id-map.yml"
+        "/app/overrides.yml"
     ) as ops_file:
         openapi = yaml.load(openapi_file, Loader=yaml.FullLoader)
         ops = yaml.load(ops_file, Loader=yaml.FullLoader)
@@ -98,7 +98,7 @@ def merge_operation_ids():
 
 
 if __name__ == "__main__":
-    result = merge_operation_ids()
+    result = merge_overrides()
     cleaner = OpenAPICleaner()
     cleaner.clean(result)
     with open("/app/openapi.yml", "w") as openapi_file:

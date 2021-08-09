@@ -1,0 +1,175 @@
+paths:
+  /connections/create-invitation:
+    post:
+      operationId: create_invitation
+  /connections:
+    get:
+      operationId: get_connections
+  /connections/create-static:
+    post:
+      operationId: create_static
+  /connections/receive-invitation:
+    post:
+      operationId: receive_invitation
+  /connections/{conn_id}:
+    get:
+      operationId: get_connection
+    delete:
+      operationId: delete_connection
+      responses:
+        200:
+          description: OK
+  /connections/{conn_id}/send-message:
+    post:
+      operationId: send_basicmessage
+      responses:
+        200:
+          description: OK
+  /credential-definitions:
+    post:
+      operationId: publish_cred_def
+  /issue-credential/send:
+    post:
+      operationId: issue_credential_automated
+  /ledger/taa:
+    get:
+      operationId: fetch_taa
+  /ledger/taa/accept:
+    post:
+      operationId: accept_taa
+      responses:
+        200:
+          description: OK
+  /present-proof/send-request:
+    post:
+      operationId: send_proof_request
+  /schemas:
+    post:
+      operationId: publish_schema
+  /wallet/did/create:
+    post:
+      operationId: create_did
+  /wallet/did/public:
+    post:
+      operationId: set_public_did
+  # Missing responses
+  /shutdown:
+    get:
+      responses:
+        200:
+          description: OK
+  /connections/{conn_id}/start-introduction:
+    post:
+      responses:
+        200:
+          description: OK
+  /out-of-band/create-invitation:
+    post:
+      responses:
+        200:
+          description: OK
+  /out-of-band/receive-invitation:
+    post:
+      responses:
+        200:
+          description: OK
+  /connections/{conn_id}/establish-inbound/{ref_id}:
+    post:
+      responses:
+        200:
+          description: OK
+  /connections/{conn_id}/remove:
+    post:
+      responses:
+        200:
+          description: OK
+  /issue-credential/revoke:
+    post:
+      responses:
+        200:
+          description: OK
+  /issue-credential/records/{cred_ex_id}/remove:
+    post:
+      responses:
+        200:
+          description: OK
+  /issue-credential/records/{cred_ex_id}/problem-report:
+    post:
+      responses:
+        200:
+          description: OK
+  /present-proof/records/{pres_ex_id}/credentials:
+    get:
+      responses:
+        200:
+          description: OK
+  /present-proof/records/{pres_ex_id}/remove:
+    post:
+      responses:
+        200:
+          description: OK
+  /action-menu/{conn_id}/close:
+    post:
+      responses:
+        200:
+          description: OK
+  /action-menu/{conn_id}/fetch:
+    post:
+      responses:
+        200:
+          description: OK
+  /action-menu/{conn_id}/perform:
+    post:
+      responses:
+        200:
+          description: OK
+  /action-menu/{conn_id}/request:
+    post:
+      responses:
+        200:
+          description: OK
+  /connections/{conn_id}/send-menu:
+    post:
+      responses:
+        200:
+          description: OK
+  /credential/{credential_id}/remove:
+    post:
+      responses:
+        200:
+          description: OK
+  /ledger/register-nym:
+    post:
+      responses:
+        200:
+          description: OK
+  /ledger/get-nym-role:
+    get:
+      responses:
+        200:
+          description: OK
+  /ledger/rotate-public-did-keypair:
+    patch:
+      responses:
+        200:
+          description: OK
+  /ledger/did-verkey:
+    get:
+      responses:
+        200:
+          description: OK
+  /ledger/did-endpoint:
+    get:
+      responses:
+        200:
+          description: OK
+  /wallet/set-did-endpoint:
+    post:
+      responses:
+        200:
+          description: OK
+  /wallet/did/local/rotate-keypair:
+    patch:
+      responses:
+        200:
+          description: OK
