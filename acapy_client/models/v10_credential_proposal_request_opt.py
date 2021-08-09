@@ -14,32 +14,31 @@ class V10CredentialProposalRequestOpt:
 
     connection_id: str
     auto_remove: Union[Unset, bool] = UNSET
-    comment: Union[Unset, None, str] = UNSET
-    cred_def_id: Union[Unset, str] = UNSET
-    credential_proposal: Union[Unset, CredentialPreview] = UNSET
-    issuer_did: Union[Unset, str] = UNSET
-    schema_id: Union[Unset, str] = UNSET
-    schema_issuer_did: Union[Unset, str] = UNSET
     schema_name: Union[Unset, str] = UNSET
+    cred_def_id: Union[Unset, str] = UNSET
+    issuer_did: Union[Unset, str] = UNSET
+    schema_issuer_did: Union[Unset, str] = UNSET
+    comment: Union[Unset, None, str] = UNSET
     schema_version: Union[Unset, str] = UNSET
+    schema_id: Union[Unset, str] = UNSET
     trace: Union[Unset, bool] = UNSET
+    credential_proposal: Union[Unset, CredentialPreview] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         connection_id = self.connection_id
         auto_remove = self.auto_remove
-        comment = self.comment
+        schema_name = self.schema_name
         cred_def_id = self.cred_def_id
+        issuer_did = self.issuer_did
+        schema_issuer_did = self.schema_issuer_did
+        comment = self.comment
+        schema_version = self.schema_version
+        schema_id = self.schema_id
+        trace = self.trace
         credential_proposal: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.credential_proposal, Unset):
             credential_proposal = self.credential_proposal.to_dict()
-
-        issuer_did = self.issuer_did
-        schema_id = self.schema_id
-        schema_issuer_did = self.schema_issuer_did
-        schema_name = self.schema_name
-        schema_version = self.schema_version
-        trace = self.trace
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -50,24 +49,24 @@ class V10CredentialProposalRequestOpt:
         )
         if auto_remove is not UNSET:
             field_dict["auto_remove"] = auto_remove
-        if comment is not UNSET:
-            field_dict["comment"] = comment
-        if cred_def_id is not UNSET:
-            field_dict["cred_def_id"] = cred_def_id
-        if credential_proposal is not UNSET:
-            field_dict["credential_proposal"] = credential_proposal
-        if issuer_did is not UNSET:
-            field_dict["issuer_did"] = issuer_did
-        if schema_id is not UNSET:
-            field_dict["schema_id"] = schema_id
-        if schema_issuer_did is not UNSET:
-            field_dict["schema_issuer_did"] = schema_issuer_did
         if schema_name is not UNSET:
             field_dict["schema_name"] = schema_name
+        if cred_def_id is not UNSET:
+            field_dict["cred_def_id"] = cred_def_id
+        if issuer_did is not UNSET:
+            field_dict["issuer_did"] = issuer_did
+        if schema_issuer_did is not UNSET:
+            field_dict["schema_issuer_did"] = schema_issuer_did
+        if comment is not UNSET:
+            field_dict["comment"] = comment
         if schema_version is not UNSET:
             field_dict["schema_version"] = schema_version
+        if schema_id is not UNSET:
+            field_dict["schema_id"] = schema_id
         if trace is not UNSET:
             field_dict["trace"] = trace
+        if credential_proposal is not UNSET:
+            field_dict["credential_proposal"] = credential_proposal
 
         return field_dict
 
@@ -78,9 +77,21 @@ class V10CredentialProposalRequestOpt:
 
         auto_remove = d.pop("auto_remove", UNSET)
 
-        comment = d.pop("comment", UNSET)
+        schema_name = d.pop("schema_name", UNSET)
 
         cred_def_id = d.pop("cred_def_id", UNSET)
+
+        issuer_did = d.pop("issuer_did", UNSET)
+
+        schema_issuer_did = d.pop("schema_issuer_did", UNSET)
+
+        comment = d.pop("comment", UNSET)
+
+        schema_version = d.pop("schema_version", UNSET)
+
+        schema_id = d.pop("schema_id", UNSET)
+
+        trace = d.pop("trace", UNSET)
 
         _credential_proposal = d.pop("credential_proposal", UNSET)
         credential_proposal: Union[Unset, CredentialPreview]
@@ -89,30 +100,18 @@ class V10CredentialProposalRequestOpt:
         else:
             credential_proposal = CredentialPreview.from_dict(_credential_proposal)
 
-        issuer_did = d.pop("issuer_did", UNSET)
-
-        schema_id = d.pop("schema_id", UNSET)
-
-        schema_issuer_did = d.pop("schema_issuer_did", UNSET)
-
-        schema_name = d.pop("schema_name", UNSET)
-
-        schema_version = d.pop("schema_version", UNSET)
-
-        trace = d.pop("trace", UNSET)
-
         v10_credential_proposal_request_opt = cls(
             connection_id=connection_id,
             auto_remove=auto_remove,
-            comment=comment,
-            cred_def_id=cred_def_id,
-            credential_proposal=credential_proposal,
-            issuer_did=issuer_did,
-            schema_id=schema_id,
-            schema_issuer_did=schema_issuer_did,
             schema_name=schema_name,
+            cred_def_id=cred_def_id,
+            issuer_did=issuer_did,
+            schema_issuer_did=schema_issuer_did,
+            comment=comment,
             schema_version=schema_version,
+            schema_id=schema_id,
             trace=trace,
+            credential_proposal=credential_proposal,
         )
 
         v10_credential_proposal_request_opt.additional_properties = d

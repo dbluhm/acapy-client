@@ -27,7 +27,7 @@ def _get_kwargs(
 
 def _parse_response(*, response: httpx.Response) -> Optional[File]:
     if response.status_code == 200:
-        response_200 = File(payload=BytesIO(response.content))
+        response_200 = File(payload=BytesIO(response.json()))
 
         return response_200
     return None

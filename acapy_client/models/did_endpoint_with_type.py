@@ -13,16 +13,17 @@ class DIDEndpointWithType:
     """ """
 
     did: str
-    endpoint: Union[Unset, str] = UNSET
     endpoint_type: Union[Unset, DIDEndpointWithTypeEndpointType] = UNSET
+    endpoint: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         did = self.did
-        endpoint = self.endpoint
         endpoint_type: Union[Unset, str] = UNSET
         if not isinstance(self.endpoint_type, Unset):
             endpoint_type = self.endpoint_type.value
+
+        endpoint = self.endpoint
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -31,10 +32,10 @@ class DIDEndpointWithType:
                 "did": did,
             }
         )
-        if endpoint is not UNSET:
-            field_dict["endpoint"] = endpoint
         if endpoint_type is not UNSET:
             field_dict["endpoint_type"] = endpoint_type
+        if endpoint is not UNSET:
+            field_dict["endpoint"] = endpoint
 
         return field_dict
 
@@ -43,8 +44,6 @@ class DIDEndpointWithType:
         d = src_dict.copy()
         did = d.pop("did")
 
-        endpoint = d.pop("endpoint", UNSET)
-
         _endpoint_type = d.pop("endpoint_type", UNSET)
         endpoint_type: Union[Unset, DIDEndpointWithTypeEndpointType]
         if isinstance(_endpoint_type, Unset):
@@ -52,10 +51,12 @@ class DIDEndpointWithType:
         else:
             endpoint_type = DIDEndpointWithTypeEndpointType(_endpoint_type)
 
+        endpoint = d.pop("endpoint", UNSET)
+
         did_endpoint_with_type = cls(
             did=did,
-            endpoint=endpoint,
             endpoint_type=endpoint_type,
+            endpoint=endpoint,
         )
 
         did_endpoint_with_type.additional_properties = d

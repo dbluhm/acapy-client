@@ -2,7 +2,7 @@ from typing import Any, Dict, List, Type, TypeVar
 
 import attr
 
-from ..models.conn_record import ConnRecord
+from ..models.connection_record import ConnectionRecord
 
 T = TypeVar("T", bound="ConnectionStaticResult")
 
@@ -12,32 +12,32 @@ class ConnectionStaticResult:
     """ """
 
     mv_verkey: str
-    my_did: str
     my_endpoint: str
-    record: ConnRecord
     their_did: str
     their_verkey: str
+    record: ConnectionRecord
+    my_did: str
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         mv_verkey = self.mv_verkey
-        my_did = self.my_did
         my_endpoint = self.my_endpoint
-        record = self.record.to_dict()
-
         their_did = self.their_did
         their_verkey = self.their_verkey
+        record = self.record.to_dict()
+
+        my_did = self.my_did
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
                 "mv_verkey": mv_verkey,
-                "my_did": my_did,
                 "my_endpoint": my_endpoint,
-                "record": record,
                 "their_did": their_did,
                 "their_verkey": their_verkey,
+                "record": record,
+                "my_did": my_did,
             }
         )
 
@@ -48,23 +48,23 @@ class ConnectionStaticResult:
         d = src_dict.copy()
         mv_verkey = d.pop("mv_verkey")
 
-        my_did = d.pop("my_did")
-
         my_endpoint = d.pop("my_endpoint")
-
-        record = ConnRecord.from_dict(d.pop("record"))
 
         their_did = d.pop("their_did")
 
         their_verkey = d.pop("their_verkey")
 
+        record = ConnectionRecord.from_dict(d.pop("record"))
+
+        my_did = d.pop("my_did")
+
         connection_static_result = cls(
             mv_verkey=mv_verkey,
-            my_did=my_did,
             my_endpoint=my_endpoint,
-            record=record,
             their_did=their_did,
             their_verkey=their_verkey,
+            record=record,
+            my_did=my_did,
         )
 
         connection_static_result.additional_properties = d

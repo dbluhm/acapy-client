@@ -3,7 +3,6 @@ from typing import Any, Dict, Optional, Union
 import httpx
 
 from ...client import Client
-from ...models.create_invitation_request import CreateInvitationRequest
 from ...models.invitation_result import InvitationResult
 from ...types import UNSET, Response, Unset
 
@@ -11,7 +10,6 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     *,
     client: Client,
-    json_body: CreateInvitationRequest,
     alias: Union[Unset, str] = UNSET,
     auto_accept: Union[Unset, bool] = UNSET,
     multi_use: Union[Unset, bool] = UNSET,
@@ -30,14 +28,11 @@ def _get_kwargs(
     }
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    json_json_body = json_body.to_dict()
-
     return {
         "url": url,
         "headers": headers,
         "cookies": cookies,
         "timeout": client.get_timeout(),
-        "json": json_json_body,
         "params": params,
     }
 
@@ -62,7 +57,6 @@ def _build_response(*, response: httpx.Response) -> Response[InvitationResult]:
 def sync_detailed(
     *,
     client: Client,
-    json_body: CreateInvitationRequest,
     alias: Union[Unset, str] = UNSET,
     auto_accept: Union[Unset, bool] = UNSET,
     multi_use: Union[Unset, bool] = UNSET,
@@ -70,7 +64,6 @@ def sync_detailed(
 ) -> Response[InvitationResult]:
     kwargs = _get_kwargs(
         client=client,
-        json_body=json_body,
         alias=alias,
         auto_accept=auto_accept,
         multi_use=multi_use,
@@ -87,7 +80,6 @@ def sync_detailed(
 def sync(
     *,
     client: Client,
-    json_body: CreateInvitationRequest,
     alias: Union[Unset, str] = UNSET,
     auto_accept: Union[Unset, bool] = UNSET,
     multi_use: Union[Unset, bool] = UNSET,
@@ -97,7 +89,6 @@ def sync(
 
     return sync_detailed(
         client=client,
-        json_body=json_body,
         alias=alias,
         auto_accept=auto_accept,
         multi_use=multi_use,
@@ -108,7 +99,6 @@ def sync(
 async def asyncio_detailed(
     *,
     client: Client,
-    json_body: CreateInvitationRequest,
     alias: Union[Unset, str] = UNSET,
     auto_accept: Union[Unset, bool] = UNSET,
     multi_use: Union[Unset, bool] = UNSET,
@@ -116,7 +106,6 @@ async def asyncio_detailed(
 ) -> Response[InvitationResult]:
     kwargs = _get_kwargs(
         client=client,
-        json_body=json_body,
         alias=alias,
         auto_accept=auto_accept,
         multi_use=multi_use,
@@ -132,7 +121,6 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Client,
-    json_body: CreateInvitationRequest,
     alias: Union[Unset, str] = UNSET,
     auto_accept: Union[Unset, bool] = UNSET,
     multi_use: Union[Unset, bool] = UNSET,
@@ -143,7 +131,6 @@ async def asyncio(
     return (
         await asyncio_detailed(
             client=client,
-            json_body=json_body,
             alias=alias,
             auto_accept=auto_accept,
             multi_use=multi_use,

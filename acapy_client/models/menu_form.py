@@ -12,13 +12,14 @@ T = TypeVar("T", bound="MenuForm")
 class MenuForm:
     """ """
 
+    title: Union[Unset, str] = UNSET
     description: Union[Unset, str] = UNSET
     params: Union[Unset, List[MenuFormParam]] = UNSET
     submit_label: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        title = self.title
         description = self.description
         params: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.params, Unset):
@@ -29,25 +30,26 @@ class MenuForm:
                 params.append(params_item)
 
         submit_label = self.submit_label
-        title = self.title
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if title is not UNSET:
+            field_dict["title"] = title
         if description is not UNSET:
             field_dict["description"] = description
         if params is not UNSET:
             field_dict["params"] = params
         if submit_label is not UNSET:
             field_dict["submit-label"] = submit_label
-        if title is not UNSET:
-            field_dict["title"] = title
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        title = d.pop("title", UNSET)
+
         description = d.pop("description", UNSET)
 
         params = []
@@ -59,13 +61,11 @@ class MenuForm:
 
         submit_label = d.pop("submit-label", UNSET)
 
-        title = d.pop("title", UNSET)
-
         menu_form = cls(
+            title=title,
             description=description,
             params=params,
             submit_label=submit_label,
-            title=title,
         )
 
         menu_form.additional_properties = d

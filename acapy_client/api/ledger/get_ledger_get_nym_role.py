@@ -1,9 +1,8 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 import httpx
 
 from ...client import Client
-from ...models.get_nym_role_response import GetNymRoleResponse
 from ...types import UNSET, Response
 
 
@@ -31,20 +30,12 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[GetNymRoleResponse]:
-    if response.status_code == 200:
-        response_200 = GetNymRoleResponse.from_dict(response.json())
-
-        return response_200
-    return None
-
-
-def _build_response(*, response: httpx.Response) -> Response[GetNymRoleResponse]:
+def _build_response(*, response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=response.status_code,
         content=response.content,
         headers=response.headers,
-        parsed=_parse_response(response=response),
+        parsed=None,
     )
 
 
@@ -52,7 +43,7 @@ def sync_detailed(
     *,
     client: Client,
     did: str,
-) -> Response[GetNymRoleResponse]:
+) -> Response[Any]:
     kwargs = _get_kwargs(
         client=client,
         did=did,
@@ -65,24 +56,11 @@ def sync_detailed(
     return _build_response(response=response)
 
 
-def sync(
-    *,
-    client: Client,
-    did: str,
-) -> Optional[GetNymRoleResponse]:
-    """ """
-
-    return sync_detailed(
-        client=client,
-        did=did,
-    ).parsed
-
-
 async def asyncio_detailed(
     *,
     client: Client,
     did: str,
-) -> Response[GetNymRoleResponse]:
+) -> Response[Any]:
     kwargs = _get_kwargs(
         client=client,
         did=did,
@@ -92,18 +70,3 @@ async def asyncio_detailed(
         response = await _client.get(**kwargs)
 
     return _build_response(response=response)
-
-
-async def asyncio(
-    *,
-    client: Client,
-    did: str,
-) -> Optional[GetNymRoleResponse]:
-    """ """
-
-    return (
-        await asyncio_detailed(
-            client=client,
-            did=did,
-        )
-    ).parsed

@@ -4,7 +4,7 @@ import httpx
 
 from ...client import Client
 from ...models.rev_reg_create_request import RevRegCreateRequest
-from ...models.rev_reg_result import RevRegResult
+from ...models.rev_reg_create_result import RevRegCreateResult
 from ...types import Response
 
 
@@ -29,15 +29,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[RevRegResult]:
+def _parse_response(*, response: httpx.Response) -> Optional[RevRegCreateResult]:
     if response.status_code == 200:
-        response_200 = RevRegResult.from_dict(response.json())
+        response_200 = RevRegCreateResult.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[RevRegResult]:
+def _build_response(*, response: httpx.Response) -> Response[RevRegCreateResult]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -50,7 +50,7 @@ def sync_detailed(
     *,
     client: Client,
     json_body: RevRegCreateRequest,
-) -> Response[RevRegResult]:
+) -> Response[RevRegCreateResult]:
     kwargs = _get_kwargs(
         client=client,
         json_body=json_body,
@@ -67,7 +67,7 @@ def sync(
     *,
     client: Client,
     json_body: RevRegCreateRequest,
-) -> Optional[RevRegResult]:
+) -> Optional[RevRegCreateResult]:
     """ """
 
     return sync_detailed(
@@ -80,7 +80,7 @@ async def asyncio_detailed(
     *,
     client: Client,
     json_body: RevRegCreateRequest,
-) -> Response[RevRegResult]:
+) -> Response[RevRegCreateResult]:
     kwargs = _get_kwargs(
         client=client,
         json_body=json_body,
@@ -96,7 +96,7 @@ async def asyncio(
     *,
     client: Client,
     json_body: RevRegCreateRequest,
-) -> Optional[RevRegResult]:
+) -> Optional[RevRegCreateResult]:
     """ """
 
     return (

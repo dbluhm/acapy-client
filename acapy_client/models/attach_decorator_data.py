@@ -14,21 +14,21 @@ class AttachDecoratorData:
     """ """
 
     base64: Union[Unset, str] = UNSET
-    json: Union[Unset, AttachDecoratorDataJson] = UNSET
     jws: Union[Unset, AttachDecoratorDataJWS] = UNSET
+    json: Union[Unset, AttachDecoratorDataJson] = UNSET
     links: Union[Unset, List[str]] = UNSET
     sha256: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         base64 = self.base64
-        json: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.json, Unset):
-            json = self.json.to_dict()
-
         jws: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.jws, Unset):
             jws = self.jws.to_dict()
+
+        json: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.json, Unset):
+            json = self.json.to_dict()
 
         links: Union[Unset, List[str]] = UNSET
         if not isinstance(self.links, Unset):
@@ -41,10 +41,10 @@ class AttachDecoratorData:
         field_dict.update({})
         if base64 is not UNSET:
             field_dict["base64"] = base64
-        if json is not UNSET:
-            field_dict["json"] = json
         if jws is not UNSET:
             field_dict["jws"] = jws
+        if json is not UNSET:
+            field_dict["json"] = json
         if links is not UNSET:
             field_dict["links"] = links
         if sha256 is not UNSET:
@@ -57,13 +57,6 @@ class AttachDecoratorData:
         d = src_dict.copy()
         base64 = d.pop("base64", UNSET)
 
-        _json = d.pop("json", UNSET)
-        json: Union[Unset, AttachDecoratorDataJson]
-        if isinstance(_json, Unset):
-            json = UNSET
-        else:
-            json = AttachDecoratorDataJson.from_dict(_json)
-
         _jws = d.pop("jws", UNSET)
         jws: Union[Unset, AttachDecoratorDataJWS]
         if isinstance(_jws, Unset):
@@ -71,14 +64,21 @@ class AttachDecoratorData:
         else:
             jws = AttachDecoratorDataJWS.from_dict(_jws)
 
+        _json = d.pop("json", UNSET)
+        json: Union[Unset, AttachDecoratorDataJson]
+        if isinstance(_json, Unset):
+            json = UNSET
+        else:
+            json = AttachDecoratorDataJson.from_dict(_json)
+
         links = cast(List[str], d.pop("links", UNSET))
 
         sha256 = d.pop("sha256", UNSET)
 
         attach_decorator_data = cls(
             base64=base64,
-            json=json,
             jws=jws,
+            json=json,
             links=links,
             sha256=sha256,
         )

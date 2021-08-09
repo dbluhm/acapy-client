@@ -9,17 +9,17 @@ T = TypeVar("T", bound="V10CredentialProblemReportRequest")
 class V10CredentialProblemReportRequest:
     """ """
 
-    description: str
+    explain_ltxt: str
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        description = self.description
+        explain_ltxt = self.explain_ltxt
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "description": description,
+                "explain_ltxt": explain_ltxt,
             }
         )
 
@@ -28,10 +28,10 @@ class V10CredentialProblemReportRequest:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        description = d.pop("description")
+        explain_ltxt = d.pop("explain_ltxt")
 
         v10_credential_problem_report_request = cls(
-            description=description,
+            explain_ltxt=explain_ltxt,
         )
 
         v10_credential_problem_report_request.additional_properties = d

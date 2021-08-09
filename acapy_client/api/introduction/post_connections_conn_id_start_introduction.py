@@ -1,9 +1,8 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 
 import httpx
 
 from ...client import Client
-from ...models.intro_module_response import IntroModuleResponse
 from ...types import UNSET, Response, Unset
 
 
@@ -34,20 +33,12 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[IntroModuleResponse]:
-    if response.status_code == 200:
-        response_200 = IntroModuleResponse.from_dict(response.json())
-
-        return response_200
-    return None
-
-
-def _build_response(*, response: httpx.Response) -> Response[IntroModuleResponse]:
+def _build_response(*, response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=response.status_code,
         content=response.content,
         headers=response.headers,
-        parsed=_parse_response(response=response),
+        parsed=None,
     )
 
 
@@ -57,7 +48,7 @@ def sync_detailed(
     conn_id: str,
     target_connection_id: str,
     message: Union[Unset, str] = UNSET,
-) -> Response[IntroModuleResponse]:
+) -> Response[Any]:
     kwargs = _get_kwargs(
         client=client,
         conn_id=conn_id,
@@ -72,30 +63,13 @@ def sync_detailed(
     return _build_response(response=response)
 
 
-def sync(
-    *,
-    client: Client,
-    conn_id: str,
-    target_connection_id: str,
-    message: Union[Unset, str] = UNSET,
-) -> Optional[IntroModuleResponse]:
-    """ """
-
-    return sync_detailed(
-        client=client,
-        conn_id=conn_id,
-        target_connection_id=target_connection_id,
-        message=message,
-    ).parsed
-
-
 async def asyncio_detailed(
     *,
     client: Client,
     conn_id: str,
     target_connection_id: str,
     message: Union[Unset, str] = UNSET,
-) -> Response[IntroModuleResponse]:
+) -> Response[Any]:
     kwargs = _get_kwargs(
         client=client,
         conn_id=conn_id,
@@ -107,22 +81,3 @@ async def asyncio_detailed(
         response = await _client.post(**kwargs)
 
     return _build_response(response=response)
-
-
-async def asyncio(
-    *,
-    client: Client,
-    conn_id: str,
-    target_connection_id: str,
-    message: Union[Unset, str] = UNSET,
-) -> Optional[IntroModuleResponse]:
-    """ """
-
-    return (
-        await asyncio_detailed(
-            client=client,
-            conn_id=conn_id,
-            target_connection_id=target_connection_id,
-            message=message,
-        )
-    ).parsed

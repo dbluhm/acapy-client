@@ -11,41 +11,41 @@ T = TypeVar("T", bound="TAARecord")
 class TAARecord:
     """ """
 
-    digest: Union[Unset, str] = UNSET
-    text: Union[Unset, str] = UNSET
     version: Union[Unset, str] = UNSET
+    text: Union[Unset, str] = UNSET
+    digest: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        digest = self.digest
-        text = self.text
         version = self.version
+        text = self.text
+        digest = self.digest
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if digest is not UNSET:
-            field_dict["digest"] = digest
-        if text is not UNSET:
-            field_dict["text"] = text
         if version is not UNSET:
             field_dict["version"] = version
+        if text is not UNSET:
+            field_dict["text"] = text
+        if digest is not UNSET:
+            field_dict["digest"] = digest
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        digest = d.pop("digest", UNSET)
+        version = d.pop("version", UNSET)
 
         text = d.pop("text", UNSET)
 
-        version = d.pop("version", UNSET)
+        digest = d.pop("digest", UNSET)
 
         taa_record = cls(
-            digest=digest,
-            text=text,
             version=version,
+            text=text,
+            digest=digest,
         )
 
         taa_record.additional_properties = d

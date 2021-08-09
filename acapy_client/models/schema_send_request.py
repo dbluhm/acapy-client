@@ -9,24 +9,23 @@ T = TypeVar("T", bound="SchemaSendRequest")
 class SchemaSendRequest:
     """ """
 
-    attributes: List[str]
-    schema_name: str
     schema_version: str
+    schema_name: str
+    attributes: List[str]
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        attributes = self.attributes
-
-        schema_name = self.schema_name
         schema_version = self.schema_version
+        schema_name = self.schema_name
+        attributes = self.attributes
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "attributes": attributes,
-                "schema_name": schema_name,
                 "schema_version": schema_version,
+                "schema_name": schema_name,
+                "attributes": attributes,
             }
         )
 
@@ -35,16 +34,16 @@ class SchemaSendRequest:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        attributes = cast(List[str], d.pop("attributes"))
+        schema_version = d.pop("schema_version")
 
         schema_name = d.pop("schema_name")
 
-        schema_version = d.pop("schema_version")
+        attributes = cast(List[str], d.pop("attributes"))
 
         schema_send_request = cls(
-            attributes=attributes,
-            schema_name=schema_name,
             schema_version=schema_version,
+            schema_name=schema_name,
+            attributes=attributes,
         )
 
         schema_send_request.additional_properties = d

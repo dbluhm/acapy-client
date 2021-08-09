@@ -11,34 +11,34 @@ T = TypeVar("T", bound="RevRegCreateRequest")
 class RevRegCreateRequest:
     """ """
 
-    credential_definition_id: Union[Unset, str] = UNSET
     max_cred_num: Union[Unset, int] = UNSET
+    credential_definition_id: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        credential_definition_id = self.credential_definition_id
         max_cred_num = self.max_cred_num
+        credential_definition_id = self.credential_definition_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if credential_definition_id is not UNSET:
-            field_dict["credential_definition_id"] = credential_definition_id
         if max_cred_num is not UNSET:
             field_dict["max_cred_num"] = max_cred_num
+        if credential_definition_id is not UNSET:
+            field_dict["credential_definition_id"] = credential_definition_id
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        credential_definition_id = d.pop("credential_definition_id", UNSET)
-
         max_cred_num = d.pop("max_cred_num", UNSET)
 
+        credential_definition_id = d.pop("credential_definition_id", UNSET)
+
         rev_reg_create_request = cls(
-            credential_definition_id=credential_definition_id,
             max_cred_num=max_cred_num,
+            credential_definition_id=credential_definition_id,
         )
 
         rev_reg_create_request.additional_properties = d

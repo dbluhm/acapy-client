@@ -1,10 +1,9 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 
 import httpx
 
 from ...client import Client
 from ...models.post_ledger_register_nym_role import PostLedgerRegisterNymRole
-from ...models.register_ledger_nym_response import RegisterLedgerNymResponse
 from ...types import UNSET, Response, Unset
 
 
@@ -42,20 +41,12 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[RegisterLedgerNymResponse]:
-    if response.status_code == 200:
-        response_200 = RegisterLedgerNymResponse.from_dict(response.json())
-
-        return response_200
-    return None
-
-
-def _build_response(*, response: httpx.Response) -> Response[RegisterLedgerNymResponse]:
+def _build_response(*, response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=response.status_code,
         content=response.content,
         headers=response.headers,
-        parsed=_parse_response(response=response),
+        parsed=None,
     )
 
 
@@ -66,7 +57,7 @@ def sync_detailed(
     verkey: str,
     alias: Union[Unset, str] = UNSET,
     role: Union[Unset, PostLedgerRegisterNymRole] = UNSET,
-) -> Response[RegisterLedgerNymResponse]:
+) -> Response[Any]:
     kwargs = _get_kwargs(
         client=client,
         did=did,
@@ -82,25 +73,6 @@ def sync_detailed(
     return _build_response(response=response)
 
 
-def sync(
-    *,
-    client: Client,
-    did: str,
-    verkey: str,
-    alias: Union[Unset, str] = UNSET,
-    role: Union[Unset, PostLedgerRegisterNymRole] = UNSET,
-) -> Optional[RegisterLedgerNymResponse]:
-    """ """
-
-    return sync_detailed(
-        client=client,
-        did=did,
-        verkey=verkey,
-        alias=alias,
-        role=role,
-    ).parsed
-
-
 async def asyncio_detailed(
     *,
     client: Client,
@@ -108,7 +80,7 @@ async def asyncio_detailed(
     verkey: str,
     alias: Union[Unset, str] = UNSET,
     role: Union[Unset, PostLedgerRegisterNymRole] = UNSET,
-) -> Response[RegisterLedgerNymResponse]:
+) -> Response[Any]:
     kwargs = _get_kwargs(
         client=client,
         did=did,
@@ -121,24 +93,3 @@ async def asyncio_detailed(
         response = await _client.post(**kwargs)
 
     return _build_response(response=response)
-
-
-async def asyncio(
-    *,
-    client: Client,
-    did: str,
-    verkey: str,
-    alias: Union[Unset, str] = UNSET,
-    role: Union[Unset, PostLedgerRegisterNymRole] = UNSET,
-) -> Optional[RegisterLedgerNymResponse]:
-    """ """
-
-    return (
-        await asyncio_detailed(
-            client=client,
-            did=did,
-            verkey=verkey,
-            alias=alias,
-            role=role,
-        )
-    ).parsed

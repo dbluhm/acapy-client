@@ -12,26 +12,26 @@ T = TypeVar("T", bound="AMLRecord")
 class AMLRecord:
     """ """
 
-    aml: Union[Unset, AMLRecordAml] = UNSET
     aml_context: Union[Unset, str] = UNSET
+    aml: Union[Unset, AMLRecordAml] = UNSET
     version: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        aml_context = self.aml_context
         aml: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.aml, Unset):
             aml = self.aml.to_dict()
 
-        aml_context = self.aml_context
         version = self.version
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if aml is not UNSET:
-            field_dict["aml"] = aml
         if aml_context is not UNSET:
             field_dict["amlContext"] = aml_context
+        if aml is not UNSET:
+            field_dict["aml"] = aml
         if version is not UNSET:
             field_dict["version"] = version
 
@@ -40,6 +40,8 @@ class AMLRecord:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        aml_context = d.pop("amlContext", UNSET)
+
         _aml = d.pop("aml", UNSET)
         aml: Union[Unset, AMLRecordAml]
         if isinstance(_aml, Unset):
@@ -47,13 +49,11 @@ class AMLRecord:
         else:
             aml = AMLRecordAml.from_dict(_aml)
 
-        aml_context = d.pop("amlContext", UNSET)
-
         version = d.pop("version", UNSET)
 
         aml_record = cls(
-            aml=aml,
             aml_context=aml_context,
+            aml=aml,
             version=version,
         )
 

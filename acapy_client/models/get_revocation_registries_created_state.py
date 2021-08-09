@@ -4,7 +4,8 @@ from enum import Enum
 class GetRevocationRegistriesCreatedState(str, Enum):
     INIT = "init"
     GENERATED = "generated"
-    POSTED = "posted"
+    PUBLISHED = "published"
+    STAGED = "staged"
     ACTIVE = "active"
     FULL = "full"
 

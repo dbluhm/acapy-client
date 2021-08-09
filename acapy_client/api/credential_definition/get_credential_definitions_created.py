@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional, Union
 import httpx
 
 from ...client import Client
-from ...models.credential_definitions_created_result import CredentialDefinitionsCreatedResult
+from ...models.credential_definitions_created_results import CredentialDefinitionsCreatedResults
 from ...types import UNSET, Response, Unset
 
 
@@ -41,15 +41,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[CredentialDefinitionsCreatedResult]:
+def _parse_response(*, response: httpx.Response) -> Optional[CredentialDefinitionsCreatedResults]:
     if response.status_code == 200:
-        response_200 = CredentialDefinitionsCreatedResult.from_dict(response.json())
+        response_200 = CredentialDefinitionsCreatedResults.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[CredentialDefinitionsCreatedResult]:
+def _build_response(*, response: httpx.Response) -> Response[CredentialDefinitionsCreatedResults]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -67,7 +67,7 @@ def sync_detailed(
     schema_issuer_did: Union[Unset, str] = UNSET,
     schema_name: Union[Unset, str] = UNSET,
     schema_version: Union[Unset, str] = UNSET,
-) -> Response[CredentialDefinitionsCreatedResult]:
+) -> Response[CredentialDefinitionsCreatedResults]:
     kwargs = _get_kwargs(
         client=client,
         cred_def_id=cred_def_id,
@@ -94,7 +94,7 @@ def sync(
     schema_issuer_did: Union[Unset, str] = UNSET,
     schema_name: Union[Unset, str] = UNSET,
     schema_version: Union[Unset, str] = UNSET,
-) -> Optional[CredentialDefinitionsCreatedResult]:
+) -> Optional[CredentialDefinitionsCreatedResults]:
     """ """
 
     return sync_detailed(
@@ -117,7 +117,7 @@ async def asyncio_detailed(
     schema_issuer_did: Union[Unset, str] = UNSET,
     schema_name: Union[Unset, str] = UNSET,
     schema_version: Union[Unset, str] = UNSET,
-) -> Response[CredentialDefinitionsCreatedResult]:
+) -> Response[CredentialDefinitionsCreatedResults]:
     kwargs = _get_kwargs(
         client=client,
         cred_def_id=cred_def_id,
@@ -143,7 +143,7 @@ async def asyncio(
     schema_issuer_did: Union[Unset, str] = UNSET,
     schema_name: Union[Unset, str] = UNSET,
     schema_version: Union[Unset, str] = UNSET,
-) -> Optional[CredentialDefinitionsCreatedResult]:
+) -> Optional[CredentialDefinitionsCreatedResults]:
     """ """
 
     return (

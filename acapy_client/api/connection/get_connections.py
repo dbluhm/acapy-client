@@ -4,9 +4,8 @@ import httpx
 
 from ...client import Client
 from ...models.connection_list import ConnectionList
-from ...models.get_connections_connection_protocol import GetConnectionsConnectionProtocol
+from ...models.get_connections_initiator import GetConnectionsInitiator
 from ...models.get_connections_state import GetConnectionsState
-from ...models.get_connections_their_role import GetConnectionsTheirRole
 from ...types import UNSET, Response, Unset
 
 
@@ -14,38 +13,34 @@ def _get_kwargs(
     *,
     client: Client,
     alias: Union[Unset, str] = UNSET,
-    connection_protocol: Union[Unset, GetConnectionsConnectionProtocol] = UNSET,
+    initiator: Union[Unset, GetConnectionsInitiator] = UNSET,
     invitation_key: Union[Unset, str] = UNSET,
     my_did: Union[Unset, str] = UNSET,
     state: Union[Unset, GetConnectionsState] = UNSET,
     their_did: Union[Unset, str] = UNSET,
-    their_role: Union[Unset, GetConnectionsTheirRole] = UNSET,
+    their_role: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
     url = "{}/connections".format(client.base_url)
 
     headers: Dict[str, Any] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
-    json_connection_protocol: Union[Unset, str] = UNSET
-    if not isinstance(connection_protocol, Unset):
-        json_connection_protocol = connection_protocol.value
+    json_initiator: Union[Unset, str] = UNSET
+    if not isinstance(initiator, Unset):
+        json_initiator = initiator.value
 
     json_state: Union[Unset, str] = UNSET
     if not isinstance(state, Unset):
         json_state = state.value
 
-    json_their_role: Union[Unset, str] = UNSET
-    if not isinstance(their_role, Unset):
-        json_their_role = their_role.value
-
     params: Dict[str, Any] = {
         "alias": alias,
-        "connection_protocol": json_connection_protocol,
+        "initiator": json_initiator,
         "invitation_key": invitation_key,
         "my_did": my_did,
         "state": json_state,
         "their_did": their_did,
-        "their_role": json_their_role,
+        "their_role": their_role,
     }
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -79,17 +74,17 @@ def sync_detailed(
     *,
     client: Client,
     alias: Union[Unset, str] = UNSET,
-    connection_protocol: Union[Unset, GetConnectionsConnectionProtocol] = UNSET,
+    initiator: Union[Unset, GetConnectionsInitiator] = UNSET,
     invitation_key: Union[Unset, str] = UNSET,
     my_did: Union[Unset, str] = UNSET,
     state: Union[Unset, GetConnectionsState] = UNSET,
     their_did: Union[Unset, str] = UNSET,
-    their_role: Union[Unset, GetConnectionsTheirRole] = UNSET,
+    their_role: Union[Unset, str] = UNSET,
 ) -> Response[ConnectionList]:
     kwargs = _get_kwargs(
         client=client,
         alias=alias,
-        connection_protocol=connection_protocol,
+        initiator=initiator,
         invitation_key=invitation_key,
         my_did=my_did,
         state=state,
@@ -108,19 +103,19 @@ def sync(
     *,
     client: Client,
     alias: Union[Unset, str] = UNSET,
-    connection_protocol: Union[Unset, GetConnectionsConnectionProtocol] = UNSET,
+    initiator: Union[Unset, GetConnectionsInitiator] = UNSET,
     invitation_key: Union[Unset, str] = UNSET,
     my_did: Union[Unset, str] = UNSET,
     state: Union[Unset, GetConnectionsState] = UNSET,
     their_did: Union[Unset, str] = UNSET,
-    their_role: Union[Unset, GetConnectionsTheirRole] = UNSET,
+    their_role: Union[Unset, str] = UNSET,
 ) -> Optional[ConnectionList]:
     """ """
 
     return sync_detailed(
         client=client,
         alias=alias,
-        connection_protocol=connection_protocol,
+        initiator=initiator,
         invitation_key=invitation_key,
         my_did=my_did,
         state=state,
@@ -133,17 +128,17 @@ async def asyncio_detailed(
     *,
     client: Client,
     alias: Union[Unset, str] = UNSET,
-    connection_protocol: Union[Unset, GetConnectionsConnectionProtocol] = UNSET,
+    initiator: Union[Unset, GetConnectionsInitiator] = UNSET,
     invitation_key: Union[Unset, str] = UNSET,
     my_did: Union[Unset, str] = UNSET,
     state: Union[Unset, GetConnectionsState] = UNSET,
     their_did: Union[Unset, str] = UNSET,
-    their_role: Union[Unset, GetConnectionsTheirRole] = UNSET,
+    their_role: Union[Unset, str] = UNSET,
 ) -> Response[ConnectionList]:
     kwargs = _get_kwargs(
         client=client,
         alias=alias,
-        connection_protocol=connection_protocol,
+        initiator=initiator,
         invitation_key=invitation_key,
         my_did=my_did,
         state=state,
@@ -161,12 +156,12 @@ async def asyncio(
     *,
     client: Client,
     alias: Union[Unset, str] = UNSET,
-    connection_protocol: Union[Unset, GetConnectionsConnectionProtocol] = UNSET,
+    initiator: Union[Unset, GetConnectionsInitiator] = UNSET,
     invitation_key: Union[Unset, str] = UNSET,
     my_did: Union[Unset, str] = UNSET,
     state: Union[Unset, GetConnectionsState] = UNSET,
     their_did: Union[Unset, str] = UNSET,
-    their_role: Union[Unset, GetConnectionsTheirRole] = UNSET,
+    their_role: Union[Unset, str] = UNSET,
 ) -> Optional[ConnectionList]:
     """ """
 
@@ -174,7 +169,7 @@ async def asyncio(
         await asyncio_detailed(
             client=client,
             alias=alias,
-            connection_protocol=connection_protocol,
+            initiator=initiator,
             invitation_key=invitation_key,
             my_did=my_did,
             state=state,

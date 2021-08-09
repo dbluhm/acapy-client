@@ -1,11 +1,12 @@
-from typing import Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
-from ..models.credential_context_item_type_0 import CredentialContextItemType0
-from ..models.credential_credential_subject import CredentialCredentialSubject
-from ..models.credential_issuer_type_0 import CredentialIssuerType0
-from ..models.linked_data_proof import LinkedDataProof
+from ..models.credential_signature import CredentialSignature
+from ..models.credential_signature_correctness_proof import CredentialSignatureCorrectnessProof
+from ..models.credential_values import CredentialValues
+from ..models.rev_reg import RevReg
+from ..models.witness import Witness
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Credential")
@@ -15,125 +16,115 @@ T = TypeVar("T", bound="Credential")
 class Credential:
     """ """
 
-    context: List[Union[CredentialContextItemType0, str]]
-    credential_subject: CredentialCredentialSubject
-    issuance_date: str
-    issuer: Union[CredentialIssuerType0, str]
-    type: List[str]
-    expiration_date: Union[Unset, str] = UNSET
-    id: Union[Unset, str] = UNSET
-    proof: Union[Unset, LinkedDataProof] = UNSET
+    rev_reg_id: Union[Unset, str] = UNSET
+    signature_correctness_proof: Union[Unset, CredentialSignatureCorrectnessProof] = UNSET
+    cred_def_id: Union[Unset, str] = UNSET
+    rev_reg: Union[Unset, RevReg] = UNSET
+    witness: Union[Unset, Witness] = UNSET
+    signature: Union[Unset, CredentialSignature] = UNSET
+    schema_id: Union[Unset, str] = UNSET
+    values: Union[Unset, CredentialValues] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        context = []
-        for context_item_data in self.context:
-            if isinstance(context_item_data, CredentialContextItemType0):
-                context_item = context_item_data.to_dict()
+        rev_reg_id = self.rev_reg_id
+        signature_correctness_proof: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.signature_correctness_proof, Unset):
+            signature_correctness_proof = self.signature_correctness_proof.to_dict()
 
-            else:
-                context_item = context_item_data
+        cred_def_id = self.cred_def_id
+        rev_reg: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.rev_reg, Unset):
+            rev_reg = self.rev_reg.to_dict()
 
-            context.append(context_item)
+        witness: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.witness, Unset):
+            witness = self.witness.to_dict()
 
-        credential_subject = self.credential_subject.to_dict()
+        signature: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.signature, Unset):
+            signature = self.signature.to_dict()
 
-        issuance_date = self.issuance_date
-        if isinstance(self.issuer, CredentialIssuerType0):
-            issuer = self.issuer.to_dict()
-
-        else:
-            issuer = self.issuer
-
-        type = self.type
-
-        expiration_date = self.expiration_date
-        id = self.id
-        proof: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.proof, Unset):
-            proof = self.proof.to_dict()
+        schema_id = self.schema_id
+        values: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.values, Unset):
+            values = self.values.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "@context": context,
-                "credentialSubject": credential_subject,
-                "issuanceDate": issuance_date,
-                "issuer": issuer,
-                "type": type,
-            }
-        )
-        if expiration_date is not UNSET:
-            field_dict["expirationDate"] = expiration_date
-        if id is not UNSET:
-            field_dict["id"] = id
-        if proof is not UNSET:
-            field_dict["proof"] = proof
+        field_dict.update({})
+        if rev_reg_id is not UNSET:
+            field_dict["rev_reg_id"] = rev_reg_id
+        if signature_correctness_proof is not UNSET:
+            field_dict["signature_correctness_proof"] = signature_correctness_proof
+        if cred_def_id is not UNSET:
+            field_dict["cred_def_id"] = cred_def_id
+        if rev_reg is not UNSET:
+            field_dict["rev_reg"] = rev_reg
+        if witness is not UNSET:
+            field_dict["witness"] = witness
+        if signature is not UNSET:
+            field_dict["signature"] = signature
+        if schema_id is not UNSET:
+            field_dict["schema_id"] = schema_id
+        if values is not UNSET:
+            field_dict["values"] = values
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        context = []
-        _context = d.pop("@context")
-        for context_item_data in _context:
+        rev_reg_id = d.pop("rev_reg_id", UNSET)
 
-            def _parse_context_item(data: object) -> Union[CredentialContextItemType0, str]:
-                try:
-                    if not isinstance(data, dict):
-                        raise TypeError()
-                    context_item_type_0 = CredentialContextItemType0.from_dict(data)
-
-                    return context_item_type_0
-                except:  # noqa: E722
-                    pass
-                return cast(Union[CredentialContextItemType0, str], data)
-
-            context_item = _parse_context_item(context_item_data)
-
-            context.append(context_item)
-
-        credential_subject = CredentialCredentialSubject.from_dict(d.pop("credentialSubject"))
-
-        issuance_date = d.pop("issuanceDate")
-
-        def _parse_issuer(data: object) -> Union[CredentialIssuerType0, str]:
-            try:
-                if not isinstance(data, dict):
-                    raise TypeError()
-                issuer_type_0 = CredentialIssuerType0.from_dict(data)
-
-                return issuer_type_0
-            except:  # noqa: E722
-                pass
-            return cast(Union[CredentialIssuerType0, str], data)
-
-        issuer = _parse_issuer(d.pop("issuer"))
-
-        type = cast(List[str], d.pop("type"))
-
-        expiration_date = d.pop("expirationDate", UNSET)
-
-        id = d.pop("id", UNSET)
-
-        _proof = d.pop("proof", UNSET)
-        proof: Union[Unset, LinkedDataProof]
-        if isinstance(_proof, Unset):
-            proof = UNSET
+        _signature_correctness_proof = d.pop("signature_correctness_proof", UNSET)
+        signature_correctness_proof: Union[Unset, CredentialSignatureCorrectnessProof]
+        if isinstance(_signature_correctness_proof, Unset):
+            signature_correctness_proof = UNSET
         else:
-            proof = LinkedDataProof.from_dict(_proof)
+            signature_correctness_proof = CredentialSignatureCorrectnessProof.from_dict(_signature_correctness_proof)
+
+        cred_def_id = d.pop("cred_def_id", UNSET)
+
+        _rev_reg = d.pop("rev_reg", UNSET)
+        rev_reg: Union[Unset, RevReg]
+        if isinstance(_rev_reg, Unset):
+            rev_reg = UNSET
+        else:
+            rev_reg = RevReg.from_dict(_rev_reg)
+
+        _witness = d.pop("witness", UNSET)
+        witness: Union[Unset, Witness]
+        if isinstance(_witness, Unset):
+            witness = UNSET
+        else:
+            witness = Witness.from_dict(_witness)
+
+        _signature = d.pop("signature", UNSET)
+        signature: Union[Unset, CredentialSignature]
+        if isinstance(_signature, Unset):
+            signature = UNSET
+        else:
+            signature = CredentialSignature.from_dict(_signature)
+
+        schema_id = d.pop("schema_id", UNSET)
+
+        _values = d.pop("values", UNSET)
+        values: Union[Unset, CredentialValues]
+        if isinstance(_values, Unset):
+            values = UNSET
+        else:
+            values = CredentialValues.from_dict(_values)
 
         credential = cls(
-            context=context,
-            credential_subject=credential_subject,
-            issuance_date=issuance_date,
-            issuer=issuer,
-            type=type,
-            expiration_date=expiration_date,
-            id=id,
-            proof=proof,
+            rev_reg_id=rev_reg_id,
+            signature_correctness_proof=signature_correctness_proof,
+            cred_def_id=cred_def_id,
+            rev_reg=rev_reg,
+            witness=witness,
+            signature=signature,
+            schema_id=schema_id,
+            values=values,
         )
 
         credential.additional_properties = d

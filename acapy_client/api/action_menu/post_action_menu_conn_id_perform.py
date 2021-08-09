@@ -1,9 +1,8 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 import httpx
 
 from ...client import Client
-from ...models.action_menu_modules_result import ActionMenuModulesResult
 from ...models.perform_request import PerformRequest
 from ...types import Response
 
@@ -30,20 +29,12 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[ActionMenuModulesResult]:
-    if response.status_code == 200:
-        response_200 = ActionMenuModulesResult.from_dict(response.json())
-
-        return response_200
-    return None
-
-
-def _build_response(*, response: httpx.Response) -> Response[ActionMenuModulesResult]:
+def _build_response(*, response: httpx.Response) -> Response[Any]:
     return Response(
         status_code=response.status_code,
         content=response.content,
         headers=response.headers,
-        parsed=_parse_response(response=response),
+        parsed=None,
     )
 
 
@@ -52,7 +43,7 @@ def sync_detailed(
     client: Client,
     conn_id: str,
     json_body: PerformRequest,
-) -> Response[ActionMenuModulesResult]:
+) -> Response[Any]:
     kwargs = _get_kwargs(
         client=client,
         conn_id=conn_id,
@@ -66,27 +57,12 @@ def sync_detailed(
     return _build_response(response=response)
 
 
-def sync(
-    *,
-    client: Client,
-    conn_id: str,
-    json_body: PerformRequest,
-) -> Optional[ActionMenuModulesResult]:
-    """ """
-
-    return sync_detailed(
-        client=client,
-        conn_id=conn_id,
-        json_body=json_body,
-    ).parsed
-
-
 async def asyncio_detailed(
     *,
     client: Client,
     conn_id: str,
     json_body: PerformRequest,
-) -> Response[ActionMenuModulesResult]:
+) -> Response[Any]:
     kwargs = _get_kwargs(
         client=client,
         conn_id=conn_id,
@@ -97,20 +73,3 @@ async def asyncio_detailed(
         response = await _client.post(**kwargs)
 
     return _build_response(response=response)
-
-
-async def asyncio(
-    *,
-    client: Client,
-    conn_id: str,
-    json_body: PerformRequest,
-) -> Optional[ActionMenuModulesResult]:
-    """ """
-
-    return (
-        await asyncio_detailed(
-            client=client,
-            conn_id=conn_id,
-            json_body=json_body,
-        )
-    ).parsed

@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 import httpx
 
 from ...client import Client
-from ...models.schema_get_result import SchemaGetResult
+from ...models.schema_get_results import SchemaGetResults
 from ...types import Response
 
 
@@ -25,15 +25,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[SchemaGetResult]:
+def _parse_response(*, response: httpx.Response) -> Optional[SchemaGetResults]:
     if response.status_code == 200:
-        response_200 = SchemaGetResult.from_dict(response.json())
+        response_200 = SchemaGetResults.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[SchemaGetResult]:
+def _build_response(*, response: httpx.Response) -> Response[SchemaGetResults]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -46,7 +46,7 @@ def sync_detailed(
     *,
     client: Client,
     schema_id: str,
-) -> Response[SchemaGetResult]:
+) -> Response[SchemaGetResults]:
     kwargs = _get_kwargs(
         client=client,
         schema_id=schema_id,
@@ -63,7 +63,7 @@ def sync(
     *,
     client: Client,
     schema_id: str,
-) -> Optional[SchemaGetResult]:
+) -> Optional[SchemaGetResults]:
     """ """
 
     return sync_detailed(
@@ -76,7 +76,7 @@ async def asyncio_detailed(
     *,
     client: Client,
     schema_id: str,
-) -> Response[SchemaGetResult]:
+) -> Response[SchemaGetResults]:
     kwargs = _get_kwargs(
         client=client,
         schema_id=schema_id,
@@ -92,7 +92,7 @@ async def asyncio(
     *,
     client: Client,
     schema_id: str,
-) -> Optional[SchemaGetResult]:
+) -> Optional[SchemaGetResults]:
     """ """
 
     return (

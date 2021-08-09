@@ -1,30 +1,22 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional
 
 import httpx
 
 from ...client import Client
 from ...models.credential_definition_send_request import CredentialDefinitionSendRequest
-from ...models.txn_or_credential_definition_send_result import TxnOrCredentialDefinitionSendResult
-from ...types import UNSET, Response, Unset
+from ...models.credential_definition_send_results import CredentialDefinitionSendResults
+from ...types import Response
 
 
 def _get_kwargs(
     *,
     client: Client,
     json_body: CredentialDefinitionSendRequest,
-    conn_id: Union[Unset, str] = UNSET,
-    create_transaction_for_endorser: Union[Unset, bool] = UNSET,
 ) -> Dict[str, Any]:
     url = "{}/credential-definitions".format(client.base_url)
 
     headers: Dict[str, Any] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
-
-    params: Dict[str, Any] = {
-        "conn_id": conn_id,
-        "create_transaction_for_endorser": create_transaction_for_endorser,
-    }
-    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
     json_json_body = json_body.to_dict()
 
@@ -34,19 +26,18 @@ def _get_kwargs(
         "cookies": cookies,
         "timeout": client.get_timeout(),
         "json": json_json_body,
-        "params": params,
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[TxnOrCredentialDefinitionSendResult]:
+def _parse_response(*, response: httpx.Response) -> Optional[CredentialDefinitionSendResults]:
     if response.status_code == 200:
-        response_200 = TxnOrCredentialDefinitionSendResult.from_dict(response.json())
+        response_200 = CredentialDefinitionSendResults.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[TxnOrCredentialDefinitionSendResult]:
+def _build_response(*, response: httpx.Response) -> Response[CredentialDefinitionSendResults]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -59,14 +50,10 @@ def sync_detailed(
     *,
     client: Client,
     json_body: CredentialDefinitionSendRequest,
-    conn_id: Union[Unset, str] = UNSET,
-    create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Response[TxnOrCredentialDefinitionSendResult]:
+) -> Response[CredentialDefinitionSendResults]:
     kwargs = _get_kwargs(
         client=client,
         json_body=json_body,
-        conn_id=conn_id,
-        create_transaction_for_endorser=create_transaction_for_endorser,
     )
 
     response = httpx.post(
@@ -80,16 +67,12 @@ def sync(
     *,
     client: Client,
     json_body: CredentialDefinitionSendRequest,
-    conn_id: Union[Unset, str] = UNSET,
-    create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Optional[TxnOrCredentialDefinitionSendResult]:
+) -> Optional[CredentialDefinitionSendResults]:
     """ """
 
     return sync_detailed(
         client=client,
         json_body=json_body,
-        conn_id=conn_id,
-        create_transaction_for_endorser=create_transaction_for_endorser,
     ).parsed
 
 
@@ -97,14 +80,10 @@ async def asyncio_detailed(
     *,
     client: Client,
     json_body: CredentialDefinitionSendRequest,
-    conn_id: Union[Unset, str] = UNSET,
-    create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Response[TxnOrCredentialDefinitionSendResult]:
+) -> Response[CredentialDefinitionSendResults]:
     kwargs = _get_kwargs(
         client=client,
         json_body=json_body,
-        conn_id=conn_id,
-        create_transaction_for_endorser=create_transaction_for_endorser,
     )
 
     async with httpx.AsyncClient() as _client:
@@ -117,16 +96,12 @@ async def asyncio(
     *,
     client: Client,
     json_body: CredentialDefinitionSendRequest,
-    conn_id: Union[Unset, str] = UNSET,
-    create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Optional[TxnOrCredentialDefinitionSendResult]:
+) -> Optional[CredentialDefinitionSendResults]:
     """ """
 
     return (
         await asyncio_detailed(
             client=client,
             json_body=json_body,
-            conn_id=conn_id,
-            create_transaction_for_endorser=create_transaction_for_endorser,
         )
     ).parsed

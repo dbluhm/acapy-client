@@ -14,22 +14,22 @@ class AttachDecorator:
 
     data: AttachDecoratorData
     id: Union[Unset, str] = UNSET
-    byte_count: Union[Unset, int] = UNSET
-    description: Union[Unset, str] = UNSET
-    filename: Union[Unset, str] = UNSET
-    lastmod_time: Union[Unset, str] = UNSET
     mime_type: Union[Unset, str] = UNSET
+    filename: Union[Unset, str] = UNSET
+    byte_count: Union[Unset, int] = UNSET
+    lastmod_time: Union[Unset, str] = UNSET
+    description: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         data = self.data.to_dict()
 
         id = self.id
-        byte_count = self.byte_count
-        description = self.description
-        filename = self.filename
-        lastmod_time = self.lastmod_time
         mime_type = self.mime_type
+        filename = self.filename
+        byte_count = self.byte_count
+        lastmod_time = self.lastmod_time
+        description = self.description
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -40,16 +40,16 @@ class AttachDecorator:
         )
         if id is not UNSET:
             field_dict["@id"] = id
-        if byte_count is not UNSET:
-            field_dict["byte_count"] = byte_count
-        if description is not UNSET:
-            field_dict["description"] = description
-        if filename is not UNSET:
-            field_dict["filename"] = filename
-        if lastmod_time is not UNSET:
-            field_dict["lastmod_time"] = lastmod_time
         if mime_type is not UNSET:
             field_dict["mime-type"] = mime_type
+        if filename is not UNSET:
+            field_dict["filename"] = filename
+        if byte_count is not UNSET:
+            field_dict["byte_count"] = byte_count
+        if lastmod_time is not UNSET:
+            field_dict["lastmod_time"] = lastmod_time
+        if description is not UNSET:
+            field_dict["description"] = description
 
         return field_dict
 
@@ -60,24 +60,24 @@ class AttachDecorator:
 
         id = d.pop("@id", UNSET)
 
-        byte_count = d.pop("byte_count", UNSET)
-
-        description = d.pop("description", UNSET)
+        mime_type = d.pop("mime-type", UNSET)
 
         filename = d.pop("filename", UNSET)
 
+        byte_count = d.pop("byte_count", UNSET)
+
         lastmod_time = d.pop("lastmod_time", UNSET)
 
-        mime_type = d.pop("mime-type", UNSET)
+        description = d.pop("description", UNSET)
 
         attach_decorator = cls(
             data=data,
             id=id,
-            byte_count=byte_count,
-            description=description,
-            filename=filename,
-            lastmod_time=lastmod_time,
             mime_type=mime_type,
+            filename=filename,
+            byte_count=byte_count,
+            lastmod_time=lastmod_time,
+            description=description,
         )
 
         attach_decorator.additional_properties = d

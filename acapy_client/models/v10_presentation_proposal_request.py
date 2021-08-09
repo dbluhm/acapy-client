@@ -2,7 +2,7 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
-from ..models.indy_pres_preview import IndyPresPreview
+from ..models.presentation_preview import PresentationPreview
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="V10PresentationProposalRequest")
@@ -13,7 +13,7 @@ class V10PresentationProposalRequest:
     """ """
 
     connection_id: str
-    presentation_proposal: IndyPresPreview
+    presentation_proposal: PresentationPreview
     auto_present: Union[Unset, bool] = UNSET
     comment: Union[Unset, None, str] = UNSET
     trace: Union[Unset, bool] = UNSET
@@ -49,7 +49,7 @@ class V10PresentationProposalRequest:
         d = src_dict.copy()
         connection_id = d.pop("connection_id")
 
-        presentation_proposal = IndyPresPreview.from_dict(d.pop("presentation_proposal"))
+        presentation_proposal = PresentationPreview.from_dict(d.pop("presentation_proposal"))
 
         auto_present = d.pop("auto_present", UNSET)
 
