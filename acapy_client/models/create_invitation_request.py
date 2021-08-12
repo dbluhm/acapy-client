@@ -14,6 +14,7 @@ class CreateInvitationRequest:
 
     mediation_id: Union[Unset, str] = UNSET
     metadata: Union[Unset, CreateInvitationRequestMetadata] = UNSET
+    my_label: Union[Unset, str] = UNSET
     recipient_keys: Union[Unset, List[str]] = UNSET
     routing_keys: Union[Unset, List[str]] = UNSET
     service_endpoint: Union[Unset, str] = UNSET
@@ -25,6 +26,7 @@ class CreateInvitationRequest:
         if not isinstance(self.metadata, Unset):
             metadata = self.metadata.to_dict()
 
+        my_label = self.my_label
         recipient_keys: Union[Unset, List[str]] = UNSET
         if not isinstance(self.recipient_keys, Unset):
             recipient_keys = self.recipient_keys
@@ -42,6 +44,8 @@ class CreateInvitationRequest:
             field_dict["mediation_id"] = mediation_id
         if metadata is not UNSET:
             field_dict["metadata"] = metadata
+        if my_label is not UNSET:
+            field_dict["my_label"] = my_label
         if recipient_keys is not UNSET:
             field_dict["recipient_keys"] = recipient_keys
         if routing_keys is not UNSET:
@@ -63,6 +67,8 @@ class CreateInvitationRequest:
         else:
             metadata = CreateInvitationRequestMetadata.from_dict(_metadata)
 
+        my_label = d.pop("my_label", UNSET)
+
         recipient_keys = cast(List[str], d.pop("recipient_keys", UNSET))
 
         routing_keys = cast(List[str], d.pop("routing_keys", UNSET))
@@ -72,6 +78,7 @@ class CreateInvitationRequest:
         create_invitation_request = cls(
             mediation_id=mediation_id,
             metadata=metadata,
+            my_label=my_label,
             recipient_keys=recipient_keys,
             routing_keys=routing_keys,
             service_endpoint=service_endpoint,

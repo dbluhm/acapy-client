@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 import attr
 
 from ..models.conn_record_accept import ConnRecordAccept
+from ..models.conn_record_connection_protocol import ConnRecordConnectionProtocol
 from ..models.conn_record_invitation_mode import ConnRecordInvitationMode
 from ..models.conn_record_routing_state import ConnRecordRoutingState
 from ..models.conn_record_their_role import ConnRecordTheirRole
@@ -18,6 +19,7 @@ class ConnRecord:
     accept: Union[Unset, ConnRecordAccept] = UNSET
     alias: Union[Unset, str] = UNSET
     connection_id: Union[Unset, str] = UNSET
+    connection_protocol: Union[Unset, ConnRecordConnectionProtocol] = UNSET
     created_at: Union[Unset, str] = UNSET
     error_msg: Union[Unset, str] = UNSET
     inbound_connection_id: Union[Unset, str] = UNSET
@@ -43,6 +45,10 @@ class ConnRecord:
 
         alias = self.alias
         connection_id = self.connection_id
+        connection_protocol: Union[Unset, str] = UNSET
+        if not isinstance(self.connection_protocol, Unset):
+            connection_protocol = self.connection_protocol.value
+
         created_at = self.created_at
         error_msg = self.error_msg
         inbound_connection_id = self.inbound_connection_id
@@ -78,6 +84,8 @@ class ConnRecord:
             field_dict["alias"] = alias
         if connection_id is not UNSET:
             field_dict["connection_id"] = connection_id
+        if connection_protocol is not UNSET:
+            field_dict["connection_protocol"] = connection_protocol
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if error_msg is not UNSET:
@@ -126,6 +134,13 @@ class ConnRecord:
         alias = d.pop("alias", UNSET)
 
         connection_id = d.pop("connection_id", UNSET)
+
+        _connection_protocol = d.pop("connection_protocol", UNSET)
+        connection_protocol: Union[Unset, ConnRecordConnectionProtocol]
+        if isinstance(_connection_protocol, Unset):
+            connection_protocol = UNSET
+        else:
+            connection_protocol = ConnRecordConnectionProtocol(_connection_protocol)
 
         created_at = d.pop("created_at", UNSET)
 
@@ -178,6 +193,7 @@ class ConnRecord:
             accept=accept,
             alias=alias,
             connection_id=connection_id,
+            connection_protocol=connection_protocol,
             created_at=created_at,
             error_msg=error_msg,
             inbound_connection_id=inbound_connection_id,

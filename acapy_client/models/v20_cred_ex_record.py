@@ -2,15 +2,15 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
-from ..models.v20_cred_ex_record_cred_issue import V20CredExRecordCredIssue
-from ..models.v20_cred_ex_record_cred_offer import V20CredExRecordCredOffer
-from ..models.v20_cred_ex_record_cred_preview import V20CredExRecordCredPreview
-from ..models.v20_cred_ex_record_cred_proposal import V20CredExRecordCredProposal
-from ..models.v20_cred_ex_record_cred_request import V20CredExRecordCredRequest
-from ..models.v20_cred_ex_record_cred_request_metadata import V20CredExRecordCredRequestMetadata
+from ..models.v20_cred_ex_record_by_format import V20CredExRecordByFormat
 from ..models.v20_cred_ex_record_initiator import V20CredExRecordInitiator
 from ..models.v20_cred_ex_record_role import V20CredExRecordRole
 from ..models.v20_cred_ex_record_state import V20CredExRecordState
+from ..models.v20_cred_issue import V20CredIssue
+from ..models.v20_cred_offer import V20CredOffer
+from ..models.v20_cred_preview import V20CredPreview
+from ..models.v20_cred_proposal import V20CredProposal
+from ..models.v20_cred_request import V20CredRequest
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="V20CredExRecord")
@@ -23,16 +23,15 @@ class V20CredExRecord:
     auto_issue: Union[Unset, bool] = UNSET
     auto_offer: Union[Unset, bool] = UNSET
     auto_remove: Union[Unset, bool] = UNSET
-    conn_id: Union[Unset, str] = UNSET
+    by_format: Union[Unset, V20CredExRecordByFormat] = UNSET
+    connection_id: Union[Unset, str] = UNSET
     created_at: Union[Unset, str] = UNSET
     cred_ex_id: Union[Unset, str] = UNSET
-    cred_id_stored: Union[Unset, str] = UNSET
-    cred_issue: Union[Unset, V20CredExRecordCredIssue] = UNSET
-    cred_offer: Union[Unset, V20CredExRecordCredOffer] = UNSET
-    cred_preview: Union[Unset, V20CredExRecordCredPreview] = UNSET
-    cred_proposal: Union[Unset, V20CredExRecordCredProposal] = UNSET
-    cred_request: Union[Unset, V20CredExRecordCredRequest] = UNSET
-    cred_request_metadata: Union[Unset, V20CredExRecordCredRequestMetadata] = UNSET
+    cred_issue: Union[Unset, V20CredIssue] = UNSET
+    cred_offer: Union[Unset, V20CredOffer] = UNSET
+    cred_preview: Union[Unset, V20CredPreview] = UNSET
+    cred_proposal: Union[Unset, V20CredProposal] = UNSET
+    cred_request: Union[Unset, V20CredRequest] = UNSET
     error_msg: Union[Unset, str] = UNSET
     initiator: Union[Unset, V20CredExRecordInitiator] = UNSET
     parent_thread_id: Union[Unset, str] = UNSET
@@ -47,10 +46,13 @@ class V20CredExRecord:
         auto_issue = self.auto_issue
         auto_offer = self.auto_offer
         auto_remove = self.auto_remove
-        conn_id = self.conn_id
+        by_format: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.by_format, Unset):
+            by_format = self.by_format.to_dict()
+
+        connection_id = self.connection_id
         created_at = self.created_at
         cred_ex_id = self.cred_ex_id
-        cred_id_stored = self.cred_id_stored
         cred_issue: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.cred_issue, Unset):
             cred_issue = self.cred_issue.to_dict()
@@ -70,10 +72,6 @@ class V20CredExRecord:
         cred_request: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.cred_request, Unset):
             cred_request = self.cred_request.to_dict()
-
-        cred_request_metadata: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.cred_request_metadata, Unset):
-            cred_request_metadata = self.cred_request_metadata.to_dict()
 
         error_msg = self.error_msg
         initiator: Union[Unset, str] = UNSET
@@ -102,14 +100,14 @@ class V20CredExRecord:
             field_dict["auto_offer"] = auto_offer
         if auto_remove is not UNSET:
             field_dict["auto_remove"] = auto_remove
-        if conn_id is not UNSET:
-            field_dict["conn_id"] = conn_id
+        if by_format is not UNSET:
+            field_dict["by_format"] = by_format
+        if connection_id is not UNSET:
+            field_dict["connection_id"] = connection_id
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if cred_ex_id is not UNSET:
             field_dict["cred_ex_id"] = cred_ex_id
-        if cred_id_stored is not UNSET:
-            field_dict["cred_id_stored"] = cred_id_stored
         if cred_issue is not UNSET:
             field_dict["cred_issue"] = cred_issue
         if cred_offer is not UNSET:
@@ -120,8 +118,6 @@ class V20CredExRecord:
             field_dict["cred_proposal"] = cred_proposal
         if cred_request is not UNSET:
             field_dict["cred_request"] = cred_request
-        if cred_request_metadata is not UNSET:
-            field_dict["cred_request_metadata"] = cred_request_metadata
         if error_msg is not UNSET:
             field_dict["error_msg"] = error_msg
         if initiator is not UNSET:
@@ -150,55 +146,53 @@ class V20CredExRecord:
 
         auto_remove = d.pop("auto_remove", UNSET)
 
-        conn_id = d.pop("conn_id", UNSET)
+        _by_format = d.pop("by_format", UNSET)
+        by_format: Union[Unset, V20CredExRecordByFormat]
+        if isinstance(_by_format, Unset):
+            by_format = UNSET
+        else:
+            by_format = V20CredExRecordByFormat.from_dict(_by_format)
+
+        connection_id = d.pop("connection_id", UNSET)
 
         created_at = d.pop("created_at", UNSET)
 
         cred_ex_id = d.pop("cred_ex_id", UNSET)
 
-        cred_id_stored = d.pop("cred_id_stored", UNSET)
-
         _cred_issue = d.pop("cred_issue", UNSET)
-        cred_issue: Union[Unset, V20CredExRecordCredIssue]
+        cred_issue: Union[Unset, V20CredIssue]
         if isinstance(_cred_issue, Unset):
             cred_issue = UNSET
         else:
-            cred_issue = V20CredExRecordCredIssue.from_dict(_cred_issue)
+            cred_issue = V20CredIssue.from_dict(_cred_issue)
 
         _cred_offer = d.pop("cred_offer", UNSET)
-        cred_offer: Union[Unset, V20CredExRecordCredOffer]
+        cred_offer: Union[Unset, V20CredOffer]
         if isinstance(_cred_offer, Unset):
             cred_offer = UNSET
         else:
-            cred_offer = V20CredExRecordCredOffer.from_dict(_cred_offer)
+            cred_offer = V20CredOffer.from_dict(_cred_offer)
 
         _cred_preview = d.pop("cred_preview", UNSET)
-        cred_preview: Union[Unset, V20CredExRecordCredPreview]
+        cred_preview: Union[Unset, V20CredPreview]
         if isinstance(_cred_preview, Unset):
             cred_preview = UNSET
         else:
-            cred_preview = V20CredExRecordCredPreview.from_dict(_cred_preview)
+            cred_preview = V20CredPreview.from_dict(_cred_preview)
 
         _cred_proposal = d.pop("cred_proposal", UNSET)
-        cred_proposal: Union[Unset, V20CredExRecordCredProposal]
+        cred_proposal: Union[Unset, V20CredProposal]
         if isinstance(_cred_proposal, Unset):
             cred_proposal = UNSET
         else:
-            cred_proposal = V20CredExRecordCredProposal.from_dict(_cred_proposal)
+            cred_proposal = V20CredProposal.from_dict(_cred_proposal)
 
         _cred_request = d.pop("cred_request", UNSET)
-        cred_request: Union[Unset, V20CredExRecordCredRequest]
+        cred_request: Union[Unset, V20CredRequest]
         if isinstance(_cred_request, Unset):
             cred_request = UNSET
         else:
-            cred_request = V20CredExRecordCredRequest.from_dict(_cred_request)
-
-        _cred_request_metadata = d.pop("cred_request_metadata", UNSET)
-        cred_request_metadata: Union[Unset, V20CredExRecordCredRequestMetadata]
-        if isinstance(_cred_request_metadata, Unset):
-            cred_request_metadata = UNSET
-        else:
-            cred_request_metadata = V20CredExRecordCredRequestMetadata.from_dict(_cred_request_metadata)
+            cred_request = V20CredRequest.from_dict(_cred_request)
 
         error_msg = d.pop("error_msg", UNSET)
 
@@ -235,16 +229,15 @@ class V20CredExRecord:
             auto_issue=auto_issue,
             auto_offer=auto_offer,
             auto_remove=auto_remove,
-            conn_id=conn_id,
+            by_format=by_format,
+            connection_id=connection_id,
             created_at=created_at,
             cred_ex_id=cred_ex_id,
-            cred_id_stored=cred_id_stored,
             cred_issue=cred_issue,
             cred_offer=cred_offer,
             cred_preview=cred_preview,
             cred_proposal=cred_proposal,
             cred_request=cred_request,
-            cred_request_metadata=cred_request_metadata,
             error_msg=error_msg,
             initiator=initiator,
             parent_thread_id=parent_thread_id,

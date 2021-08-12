@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 import httpx
 
 from ...client import Client
-from ...models.action_menu_modules_result import ActionMenuModulesResult
+from ...models.action_menu_fetch_result import ActionMenuFetchResult
 from ...types import Response
 
 
@@ -25,15 +25,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[ActionMenuModulesResult]:
+def _parse_response(*, response: httpx.Response) -> Optional[ActionMenuFetchResult]:
     if response.status_code == 200:
-        response_200 = ActionMenuModulesResult.from_dict(response.json())
+        response_200 = ActionMenuFetchResult.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[ActionMenuModulesResult]:
+def _build_response(*, response: httpx.Response) -> Response[ActionMenuFetchResult]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -46,7 +46,7 @@ def sync_detailed(
     *,
     client: Client,
     conn_id: str,
-) -> Response[ActionMenuModulesResult]:
+) -> Response[ActionMenuFetchResult]:
     kwargs = _get_kwargs(
         client=client,
         conn_id=conn_id,
@@ -63,7 +63,7 @@ def sync(
     *,
     client: Client,
     conn_id: str,
-) -> Optional[ActionMenuModulesResult]:
+) -> Optional[ActionMenuFetchResult]:
     """ """
 
     return sync_detailed(
@@ -76,7 +76,7 @@ async def asyncio_detailed(
     *,
     client: Client,
     conn_id: str,
-) -> Response[ActionMenuModulesResult]:
+) -> Response[ActionMenuFetchResult]:
     kwargs = _get_kwargs(
         client=client,
         conn_id=conn_id,
@@ -92,7 +92,7 @@ async def asyncio(
     *,
     client: Client,
     conn_id: str,
-) -> Optional[ActionMenuModulesResult]:
+) -> Optional[ActionMenuFetchResult]:
     """ """
 
     return (

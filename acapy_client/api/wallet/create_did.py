@@ -3,6 +3,7 @@ from typing import Any, Dict, Optional
 import httpx
 
 from ...client import Client
+from ...models.did_create import DIDCreate
 from ...models.did_result import DIDResult
 from ...types import Response
 
@@ -10,17 +11,21 @@ from ...types import Response
 def _get_kwargs(
     *,
     client: Client,
+    json_body: DIDCreate,
 ) -> Dict[str, Any]:
     url = "{}/wallet/did/create".format(client.base_url)
 
     headers: Dict[str, Any] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    json_json_body = json_body.to_dict()
+
     return {
         "url": url,
         "headers": headers,
         "cookies": cookies,
         "timeout": client.get_timeout(),
+        "json": json_json_body,
     }
 
 
@@ -44,9 +49,11 @@ def _build_response(*, response: httpx.Response) -> Response[DIDResult]:
 def sync_detailed(
     *,
     client: Client,
+    json_body: DIDCreate,
 ) -> Response[DIDResult]:
     kwargs = _get_kwargs(
         client=client,
+        json_body=json_body,
     )
 
     response = httpx.post(
@@ -59,20 +66,24 @@ def sync_detailed(
 def sync(
     *,
     client: Client,
+    json_body: DIDCreate,
 ) -> Optional[DIDResult]:
     """ """
 
     return sync_detailed(
         client=client,
+        json_body=json_body,
     ).parsed
 
 
 async def asyncio_detailed(
     *,
     client: Client,
+    json_body: DIDCreate,
 ) -> Response[DIDResult]:
     kwargs = _get_kwargs(
         client=client,
+        json_body=json_body,
     )
 
     async with httpx.AsyncClient() as _client:
@@ -84,11 +95,13 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Client,
+    json_body: DIDCreate,
 ) -> Optional[DIDResult]:
     """ """
 
     return (
         await asyncio_detailed(
             client=client,
+            json_body=json_body,
         )
     ).parsed

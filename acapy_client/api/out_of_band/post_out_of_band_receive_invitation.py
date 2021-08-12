@@ -4,14 +4,14 @@ import httpx
 
 from ...client import Client
 from ...models.conn_record import ConnRecord
-from ...models.invitation_receive_request import InvitationReceiveRequest
+from ...models.invitation_message import InvitationMessage
 from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
     client: Client,
-    json_body: InvitationReceiveRequest,
+    json_body: InvitationMessage,
     alias: Union[Unset, str] = UNSET,
     auto_accept: Union[Unset, bool] = UNSET,
     mediation_id: Union[Unset, str] = UNSET,
@@ -62,7 +62,7 @@ def _build_response(*, response: httpx.Response) -> Response[ConnRecord]:
 def sync_detailed(
     *,
     client: Client,
-    json_body: InvitationReceiveRequest,
+    json_body: InvitationMessage,
     alias: Union[Unset, str] = UNSET,
     auto_accept: Union[Unset, bool] = UNSET,
     mediation_id: Union[Unset, str] = UNSET,
@@ -87,7 +87,7 @@ def sync_detailed(
 def sync(
     *,
     client: Client,
-    json_body: InvitationReceiveRequest,
+    json_body: InvitationMessage,
     alias: Union[Unset, str] = UNSET,
     auto_accept: Union[Unset, bool] = UNSET,
     mediation_id: Union[Unset, str] = UNSET,
@@ -108,7 +108,7 @@ def sync(
 async def asyncio_detailed(
     *,
     client: Client,
-    json_body: InvitationReceiveRequest,
+    json_body: InvitationMessage,
     alias: Union[Unset, str] = UNSET,
     auto_accept: Union[Unset, bool] = UNSET,
     mediation_id: Union[Unset, str] = UNSET,
@@ -132,7 +132,7 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Client,
-    json_body: InvitationReceiveRequest,
+    json_body: InvitationMessage,
     alias: Union[Unset, str] = UNSET,
     auto_accept: Union[Unset, bool] = UNSET,
     mediation_id: Union[Unset, str] = UNSET,

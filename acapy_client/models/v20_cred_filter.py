@@ -2,7 +2,7 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
-from ..models.v20_cred_filter_dif import V20CredFilterDIF
+from ..models.ld_proof_vc_detail import LDProofVCDetail
 from ..models.v20_cred_filter_indy import V20CredFilterIndy
 from ..types import UNSET, Unset
 
@@ -13,39 +13,32 @@ T = TypeVar("T", bound="V20CredFilter")
 class V20CredFilter:
     """ """
 
-    dif: Union[Unset, V20CredFilterDIF] = UNSET
     indy: Union[Unset, V20CredFilterIndy] = UNSET
+    ld_proof: Union[Unset, LDProofVCDetail] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        dif: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.dif, Unset):
-            dif = self.dif.to_dict()
-
         indy: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.indy, Unset):
             indy = self.indy.to_dict()
 
+        ld_proof: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.ld_proof, Unset):
+            ld_proof = self.ld_proof.to_dict()
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if dif is not UNSET:
-            field_dict["dif"] = dif
         if indy is not UNSET:
             field_dict["indy"] = indy
+        if ld_proof is not UNSET:
+            field_dict["ld_proof"] = ld_proof
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        _dif = d.pop("dif", UNSET)
-        dif: Union[Unset, V20CredFilterDIF]
-        if isinstance(_dif, Unset):
-            dif = UNSET
-        else:
-            dif = V20CredFilterDIF.from_dict(_dif)
-
         _indy = d.pop("indy", UNSET)
         indy: Union[Unset, V20CredFilterIndy]
         if isinstance(_indy, Unset):
@@ -53,9 +46,16 @@ class V20CredFilter:
         else:
             indy = V20CredFilterIndy.from_dict(_indy)
 
+        _ld_proof = d.pop("ld_proof", UNSET)
+        ld_proof: Union[Unset, LDProofVCDetail]
+        if isinstance(_ld_proof, Unset):
+            ld_proof = UNSET
+        else:
+            ld_proof = LDProofVCDetail.from_dict(_ld_proof)
+
         v20_cred_filter = cls(
-            dif=dif,
             indy=indy,
+            ld_proof=ld_proof,
         )
 
         v20_cred_filter.additional_properties = d

@@ -2,8 +2,8 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
+from ..models.cred_def_value import CredDefValue
 from ..models.credential_definition_type import CredentialDefinitionType
-from ..models.credential_definition_value import CredentialDefinitionValue
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CredentialDefinition")
@@ -17,7 +17,7 @@ class CredentialDefinition:
     schema_id: Union[Unset, str] = UNSET
     tag: Union[Unset, str] = UNSET
     type: Union[Unset, CredentialDefinitionType] = UNSET
-    value: Union[Unset, CredentialDefinitionValue] = UNSET
+    value: Union[Unset, CredDefValue] = UNSET
     ver: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
@@ -70,11 +70,11 @@ class CredentialDefinition:
             type = CredentialDefinitionType.from_dict(_type)
 
         _value = d.pop("value", UNSET)
-        value: Union[Unset, CredentialDefinitionValue]
+        value: Union[Unset, CredDefValue]
         if isinstance(_value, Unset):
             value = UNSET
         else:
-            value = CredentialDefinitionValue.from_dict(_value)
+            value = CredDefValue.from_dict(_value)
 
         ver = d.pop("ver", UNSET)
 

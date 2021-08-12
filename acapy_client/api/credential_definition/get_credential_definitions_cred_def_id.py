@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 import httpx
 
 from ...client import Client
-from ...models.credential_definition_get_results import CredentialDefinitionGetResults
+from ...models.credential_definition_get_result import CredentialDefinitionGetResult
 from ...types import Response
 
 
@@ -25,15 +25,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[CredentialDefinitionGetResults]:
+def _parse_response(*, response: httpx.Response) -> Optional[CredentialDefinitionGetResult]:
     if response.status_code == 200:
-        response_200 = CredentialDefinitionGetResults.from_dict(response.json())
+        response_200 = CredentialDefinitionGetResult.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[CredentialDefinitionGetResults]:
+def _build_response(*, response: httpx.Response) -> Response[CredentialDefinitionGetResult]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -46,7 +46,7 @@ def sync_detailed(
     *,
     client: Client,
     cred_def_id: str,
-) -> Response[CredentialDefinitionGetResults]:
+) -> Response[CredentialDefinitionGetResult]:
     kwargs = _get_kwargs(
         client=client,
         cred_def_id=cred_def_id,
@@ -63,7 +63,7 @@ def sync(
     *,
     client: Client,
     cred_def_id: str,
-) -> Optional[CredentialDefinitionGetResults]:
+) -> Optional[CredentialDefinitionGetResult]:
     """ """
 
     return sync_detailed(
@@ -76,7 +76,7 @@ async def asyncio_detailed(
     *,
     client: Client,
     cred_def_id: str,
-) -> Response[CredentialDefinitionGetResults]:
+) -> Response[CredentialDefinitionGetResult]:
     kwargs = _get_kwargs(
         client=client,
         cred_def_id=cred_def_id,
@@ -92,7 +92,7 @@ async def asyncio(
     *,
     client: Client,
     cred_def_id: str,
-) -> Optional[CredentialDefinitionGetResults]:
+) -> Optional[CredentialDefinitionGetResult]:
     """ """
 
     return (

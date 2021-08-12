@@ -3,8 +3,8 @@ from typing import Any, Dict, Optional, Union
 import httpx
 
 from ...client import Client
-from ...models.ledger_modules_result import LedgerModulesResult
 from ...models.post_ledger_register_nym_role import PostLedgerRegisterNymRole
+from ...models.register_ledger_nym_response import RegisterLedgerNymResponse
 from ...types import UNSET, Response, Unset
 
 
@@ -42,15 +42,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[LedgerModulesResult]:
+def _parse_response(*, response: httpx.Response) -> Optional[RegisterLedgerNymResponse]:
     if response.status_code == 200:
-        response_200 = LedgerModulesResult.from_dict(response.json())
+        response_200 = RegisterLedgerNymResponse.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[LedgerModulesResult]:
+def _build_response(*, response: httpx.Response) -> Response[RegisterLedgerNymResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -66,7 +66,7 @@ def sync_detailed(
     verkey: str,
     alias: Union[Unset, str] = UNSET,
     role: Union[Unset, PostLedgerRegisterNymRole] = UNSET,
-) -> Response[LedgerModulesResult]:
+) -> Response[RegisterLedgerNymResponse]:
     kwargs = _get_kwargs(
         client=client,
         did=did,
@@ -89,7 +89,7 @@ def sync(
     verkey: str,
     alias: Union[Unset, str] = UNSET,
     role: Union[Unset, PostLedgerRegisterNymRole] = UNSET,
-) -> Optional[LedgerModulesResult]:
+) -> Optional[RegisterLedgerNymResponse]:
     """ """
 
     return sync_detailed(
@@ -108,7 +108,7 @@ async def asyncio_detailed(
     verkey: str,
     alias: Union[Unset, str] = UNSET,
     role: Union[Unset, PostLedgerRegisterNymRole] = UNSET,
-) -> Response[LedgerModulesResult]:
+) -> Response[RegisterLedgerNymResponse]:
     kwargs = _get_kwargs(
         client=client,
         did=did,
@@ -130,7 +130,7 @@ async def asyncio(
     verkey: str,
     alias: Union[Unset, str] = UNSET,
     role: Union[Unset, PostLedgerRegisterNymRole] = UNSET,
-) -> Optional[LedgerModulesResult]:
+) -> Optional[RegisterLedgerNymResponse]:
     """ """
 
     return (

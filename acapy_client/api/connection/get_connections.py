@@ -4,6 +4,7 @@ import httpx
 
 from ...client import Client
 from ...models.connection_list import ConnectionList
+from ...models.get_connections_connection_protocol import GetConnectionsConnectionProtocol
 from ...models.get_connections_state import GetConnectionsState
 from ...models.get_connections_their_role import GetConnectionsTheirRole
 from ...types import UNSET, Response, Unset
@@ -13,6 +14,7 @@ def _get_kwargs(
     *,
     client: Client,
     alias: Union[Unset, str] = UNSET,
+    connection_protocol: Union[Unset, GetConnectionsConnectionProtocol] = UNSET,
     invitation_key: Union[Unset, str] = UNSET,
     my_did: Union[Unset, str] = UNSET,
     state: Union[Unset, GetConnectionsState] = UNSET,
@@ -24,6 +26,10 @@ def _get_kwargs(
     headers: Dict[str, Any] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    json_connection_protocol: Union[Unset, str] = UNSET
+    if not isinstance(connection_protocol, Unset):
+        json_connection_protocol = connection_protocol.value
+
     json_state: Union[Unset, str] = UNSET
     if not isinstance(state, Unset):
         json_state = state.value
@@ -34,6 +40,7 @@ def _get_kwargs(
 
     params: Dict[str, Any] = {
         "alias": alias,
+        "connection_protocol": json_connection_protocol,
         "invitation_key": invitation_key,
         "my_did": my_did,
         "state": json_state,
@@ -72,6 +79,7 @@ def sync_detailed(
     *,
     client: Client,
     alias: Union[Unset, str] = UNSET,
+    connection_protocol: Union[Unset, GetConnectionsConnectionProtocol] = UNSET,
     invitation_key: Union[Unset, str] = UNSET,
     my_did: Union[Unset, str] = UNSET,
     state: Union[Unset, GetConnectionsState] = UNSET,
@@ -81,6 +89,7 @@ def sync_detailed(
     kwargs = _get_kwargs(
         client=client,
         alias=alias,
+        connection_protocol=connection_protocol,
         invitation_key=invitation_key,
         my_did=my_did,
         state=state,
@@ -99,6 +108,7 @@ def sync(
     *,
     client: Client,
     alias: Union[Unset, str] = UNSET,
+    connection_protocol: Union[Unset, GetConnectionsConnectionProtocol] = UNSET,
     invitation_key: Union[Unset, str] = UNSET,
     my_did: Union[Unset, str] = UNSET,
     state: Union[Unset, GetConnectionsState] = UNSET,
@@ -110,6 +120,7 @@ def sync(
     return sync_detailed(
         client=client,
         alias=alias,
+        connection_protocol=connection_protocol,
         invitation_key=invitation_key,
         my_did=my_did,
         state=state,
@@ -122,6 +133,7 @@ async def asyncio_detailed(
     *,
     client: Client,
     alias: Union[Unset, str] = UNSET,
+    connection_protocol: Union[Unset, GetConnectionsConnectionProtocol] = UNSET,
     invitation_key: Union[Unset, str] = UNSET,
     my_did: Union[Unset, str] = UNSET,
     state: Union[Unset, GetConnectionsState] = UNSET,
@@ -131,6 +143,7 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         client=client,
         alias=alias,
+        connection_protocol=connection_protocol,
         invitation_key=invitation_key,
         my_did=my_did,
         state=state,
@@ -148,6 +161,7 @@ async def asyncio(
     *,
     client: Client,
     alias: Union[Unset, str] = UNSET,
+    connection_protocol: Union[Unset, GetConnectionsConnectionProtocol] = UNSET,
     invitation_key: Union[Unset, str] = UNSET,
     my_did: Union[Unset, str] = UNSET,
     state: Union[Unset, GetConnectionsState] = UNSET,
@@ -160,6 +174,7 @@ async def asyncio(
         await asyncio_detailed(
             client=client,
             alias=alias,
+            connection_protocol=connection_protocol,
             invitation_key=invitation_key,
             my_did=my_did,
             state=state,

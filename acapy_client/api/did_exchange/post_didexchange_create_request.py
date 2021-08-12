@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional, Union
 import httpx
 
 from ...client import Client
-from ...models.didx_request import DIDXRequest
+from ...models.conn_record import ConnRecord
 from ...types import UNSET, Response, Unset
 
 
@@ -14,6 +14,7 @@ def _get_kwargs(
     mediation_id: Union[Unset, str] = UNSET,
     my_endpoint: Union[Unset, str] = UNSET,
     my_label: Union[Unset, str] = UNSET,
+    use_public_did: Union[Unset, bool] = UNSET,
 ) -> Dict[str, Any]:
     url = "{}/didexchange/create-request".format(client.base_url)
 
@@ -25,6 +26,7 @@ def _get_kwargs(
         "mediation_id": mediation_id,
         "my_endpoint": my_endpoint,
         "my_label": my_label,
+        "use_public_did": use_public_did,
     }
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -37,15 +39,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[DIDXRequest]:
+def _parse_response(*, response: httpx.Response) -> Optional[ConnRecord]:
     if response.status_code == 200:
-        response_200 = DIDXRequest.from_dict(response.json())
+        response_200 = ConnRecord.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[DIDXRequest]:
+def _build_response(*, response: httpx.Response) -> Response[ConnRecord]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -61,13 +63,15 @@ def sync_detailed(
     mediation_id: Union[Unset, str] = UNSET,
     my_endpoint: Union[Unset, str] = UNSET,
     my_label: Union[Unset, str] = UNSET,
-) -> Response[DIDXRequest]:
+    use_public_did: Union[Unset, bool] = UNSET,
+) -> Response[ConnRecord]:
     kwargs = _get_kwargs(
         client=client,
         their_public_did=their_public_did,
         mediation_id=mediation_id,
         my_endpoint=my_endpoint,
         my_label=my_label,
+        use_public_did=use_public_did,
     )
 
     response = httpx.post(
@@ -84,7 +88,8 @@ def sync(
     mediation_id: Union[Unset, str] = UNSET,
     my_endpoint: Union[Unset, str] = UNSET,
     my_label: Union[Unset, str] = UNSET,
-) -> Optional[DIDXRequest]:
+    use_public_did: Union[Unset, bool] = UNSET,
+) -> Optional[ConnRecord]:
     """ """
 
     return sync_detailed(
@@ -93,6 +98,7 @@ def sync(
         mediation_id=mediation_id,
         my_endpoint=my_endpoint,
         my_label=my_label,
+        use_public_did=use_public_did,
     ).parsed
 
 
@@ -103,13 +109,15 @@ async def asyncio_detailed(
     mediation_id: Union[Unset, str] = UNSET,
     my_endpoint: Union[Unset, str] = UNSET,
     my_label: Union[Unset, str] = UNSET,
-) -> Response[DIDXRequest]:
+    use_public_did: Union[Unset, bool] = UNSET,
+) -> Response[ConnRecord]:
     kwargs = _get_kwargs(
         client=client,
         their_public_did=their_public_did,
         mediation_id=mediation_id,
         my_endpoint=my_endpoint,
         my_label=my_label,
+        use_public_did=use_public_did,
     )
 
     async with httpx.AsyncClient() as _client:
@@ -125,7 +133,8 @@ async def asyncio(
     mediation_id: Union[Unset, str] = UNSET,
     my_endpoint: Union[Unset, str] = UNSET,
     my_label: Union[Unset, str] = UNSET,
-) -> Optional[DIDXRequest]:
+    use_public_did: Union[Unset, bool] = UNSET,
+) -> Optional[ConnRecord]:
     """ """
 
     return (
@@ -135,5 +144,6 @@ async def asyncio(
             mediation_id=mediation_id,
             my_endpoint=my_endpoint,
             my_label=my_label,
+            use_public_did=use_public_did,
         )
     ).parsed

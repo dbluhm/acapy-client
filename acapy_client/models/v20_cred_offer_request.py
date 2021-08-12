@@ -14,23 +14,25 @@ class V20CredOfferRequest:
     """ """
 
     connection_id: str
-    credential_preview: V20CredPreview
     filter_: V20CredFilter
     auto_issue: Union[Unset, bool] = UNSET
     auto_remove: Union[Unset, bool] = UNSET
     comment: Union[Unset, None, str] = UNSET
+    credential_preview: Union[Unset, V20CredPreview] = UNSET
     trace: Union[Unset, bool] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         connection_id = self.connection_id
-        credential_preview = self.credential_preview.to_dict()
-
         filter_ = self.filter_.to_dict()
 
         auto_issue = self.auto_issue
         auto_remove = self.auto_remove
         comment = self.comment
+        credential_preview: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.credential_preview, Unset):
+            credential_preview = self.credential_preview.to_dict()
+
         trace = self.trace
 
         field_dict: Dict[str, Any] = {}
@@ -38,7 +40,6 @@ class V20CredOfferRequest:
         field_dict.update(
             {
                 "connection_id": connection_id,
-                "credential_preview": credential_preview,
                 "filter": filter_,
             }
         )
@@ -48,6 +49,8 @@ class V20CredOfferRequest:
             field_dict["auto_remove"] = auto_remove
         if comment is not UNSET:
             field_dict["comment"] = comment
+        if credential_preview is not UNSET:
+            field_dict["credential_preview"] = credential_preview
         if trace is not UNSET:
             field_dict["trace"] = trace
 
@@ -58,8 +61,6 @@ class V20CredOfferRequest:
         d = src_dict.copy()
         connection_id = d.pop("connection_id")
 
-        credential_preview = V20CredPreview.from_dict(d.pop("credential_preview"))
-
         filter_ = V20CredFilter.from_dict(d.pop("filter"))
 
         auto_issue = d.pop("auto_issue", UNSET)
@@ -68,15 +69,22 @@ class V20CredOfferRequest:
 
         comment = d.pop("comment", UNSET)
 
+        _credential_preview = d.pop("credential_preview", UNSET)
+        credential_preview: Union[Unset, V20CredPreview]
+        if isinstance(_credential_preview, Unset):
+            credential_preview = UNSET
+        else:
+            credential_preview = V20CredPreview.from_dict(_credential_preview)
+
         trace = d.pop("trace", UNSET)
 
         v20_cred_offer_request = cls(
             connection_id=connection_id,
-            credential_preview=credential_preview,
             filter_=filter_,
             auto_issue=auto_issue,
             auto_remove=auto_remove,
             comment=comment,
+            credential_preview=credential_preview,
             trace=trace,
         )
 

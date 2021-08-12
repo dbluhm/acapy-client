@@ -2,8 +2,8 @@ from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 import attr
 
+from ..models.indy_proof_req_attr_spec_non_revoked import IndyProofReqAttrSpecNonRevoked
 from ..models.indy_proof_req_attr_spec_restrictions_item import IndyProofReqAttrSpecRestrictionsItem
-from ..models.indy_proof_req_non_revoked import IndyProofReqNonRevoked
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="IndyProofReqAttrSpec")
@@ -15,7 +15,7 @@ class IndyProofReqAttrSpec:
 
     name: Union[Unset, str] = UNSET
     names: Union[Unset, List[str]] = UNSET
-    non_revoked: Union[Unset, IndyProofReqNonRevoked] = UNSET
+    non_revoked: Union[Unset, None, IndyProofReqAttrSpecNonRevoked] = UNSET
     restrictions: Union[Unset, List[IndyProofReqAttrSpecRestrictionsItem]] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
@@ -25,9 +25,9 @@ class IndyProofReqAttrSpec:
         if not isinstance(self.names, Unset):
             names = self.names
 
-        non_revoked: Union[Unset, Dict[str, Any]] = UNSET
+        non_revoked: Union[Unset, None, Dict[str, Any]] = UNSET
         if not isinstance(self.non_revoked, Unset):
-            non_revoked = self.non_revoked.to_dict()
+            non_revoked = self.non_revoked.to_dict() if self.non_revoked else None
 
         restrictions: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.restrictions, Unset):
@@ -59,11 +59,13 @@ class IndyProofReqAttrSpec:
         names = cast(List[str], d.pop("names", UNSET))
 
         _non_revoked = d.pop("non_revoked", UNSET)
-        non_revoked: Union[Unset, IndyProofReqNonRevoked]
-        if isinstance(_non_revoked, Unset):
+        non_revoked: Union[Unset, None, IndyProofReqAttrSpecNonRevoked]
+        if _non_revoked is None:
+            non_revoked = None
+        elif isinstance(_non_revoked, Unset):
             non_revoked = UNSET
         else:
-            non_revoked = IndyProofReqNonRevoked.from_dict(_non_revoked)
+            non_revoked = IndyProofReqAttrSpecNonRevoked.from_dict(_non_revoked)
 
         restrictions = []
         _restrictions = d.pop("restrictions", UNSET)

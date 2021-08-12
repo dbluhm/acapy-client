@@ -3,8 +3,8 @@ from typing import Any, Dict, Optional, Union
 import httpx
 
 from ...client import Client
+from ...models.get_did_endpoint_response import GetDIDEndpointResponse
 from ...models.get_ledger_did_endpoint_endpoint_type import GetLedgerDidEndpointEndpointType
-from ...models.ledger_modules_result import LedgerModulesResult
 from ...types import UNSET, Response, Unset
 
 
@@ -38,15 +38,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[LedgerModulesResult]:
+def _parse_response(*, response: httpx.Response) -> Optional[GetDIDEndpointResponse]:
     if response.status_code == 200:
-        response_200 = LedgerModulesResult.from_dict(response.json())
+        response_200 = GetDIDEndpointResponse.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[LedgerModulesResult]:
+def _build_response(*, response: httpx.Response) -> Response[GetDIDEndpointResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -60,7 +60,7 @@ def sync_detailed(
     client: Client,
     did: str,
     endpoint_type: Union[Unset, GetLedgerDidEndpointEndpointType] = UNSET,
-) -> Response[LedgerModulesResult]:
+) -> Response[GetDIDEndpointResponse]:
     kwargs = _get_kwargs(
         client=client,
         did=did,
@@ -79,7 +79,7 @@ def sync(
     client: Client,
     did: str,
     endpoint_type: Union[Unset, GetLedgerDidEndpointEndpointType] = UNSET,
-) -> Optional[LedgerModulesResult]:
+) -> Optional[GetDIDEndpointResponse]:
     """ """
 
     return sync_detailed(
@@ -94,7 +94,7 @@ async def asyncio_detailed(
     client: Client,
     did: str,
     endpoint_type: Union[Unset, GetLedgerDidEndpointEndpointType] = UNSET,
-) -> Response[LedgerModulesResult]:
+) -> Response[GetDIDEndpointResponse]:
     kwargs = _get_kwargs(
         client=client,
         did=did,
@@ -112,7 +112,7 @@ async def asyncio(
     client: Client,
     did: str,
     endpoint_type: Union[Unset, GetLedgerDidEndpointEndpointType] = UNSET,
-) -> Optional[LedgerModulesResult]:
+) -> Optional[GetDIDEndpointResponse]:
     """ """
 
     return (

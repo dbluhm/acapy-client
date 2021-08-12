@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional, Union
 import httpx
 
 from ...client import Client
-from ...models.schemas_created_results import SchemasCreatedResults
+from ...models.schemas_created_result import SchemasCreatedResult
 from ...types import UNSET, Response, Unset
 
 
@@ -37,15 +37,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[SchemasCreatedResults]:
+def _parse_response(*, response: httpx.Response) -> Optional[SchemasCreatedResult]:
     if response.status_code == 200:
-        response_200 = SchemasCreatedResults.from_dict(response.json())
+        response_200 = SchemasCreatedResult.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[SchemasCreatedResults]:
+def _build_response(*, response: httpx.Response) -> Response[SchemasCreatedResult]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -61,7 +61,7 @@ def sync_detailed(
     schema_issuer_did: Union[Unset, str] = UNSET,
     schema_name: Union[Unset, str] = UNSET,
     schema_version: Union[Unset, str] = UNSET,
-) -> Response[SchemasCreatedResults]:
+) -> Response[SchemasCreatedResult]:
     kwargs = _get_kwargs(
         client=client,
         schema_id=schema_id,
@@ -84,7 +84,7 @@ def sync(
     schema_issuer_did: Union[Unset, str] = UNSET,
     schema_name: Union[Unset, str] = UNSET,
     schema_version: Union[Unset, str] = UNSET,
-) -> Optional[SchemasCreatedResults]:
+) -> Optional[SchemasCreatedResult]:
     """ """
 
     return sync_detailed(
@@ -103,7 +103,7 @@ async def asyncio_detailed(
     schema_issuer_did: Union[Unset, str] = UNSET,
     schema_name: Union[Unset, str] = UNSET,
     schema_version: Union[Unset, str] = UNSET,
-) -> Response[SchemasCreatedResults]:
+) -> Response[SchemasCreatedResult]:
     kwargs = _get_kwargs(
         client=client,
         schema_id=schema_id,
@@ -125,7 +125,7 @@ async def asyncio(
     schema_issuer_did: Union[Unset, str] = UNSET,
     schema_name: Union[Unset, str] = UNSET,
     schema_version: Union[Unset, str] = UNSET,
-) -> Optional[SchemasCreatedResults]:
+) -> Optional[SchemasCreatedResult]:
     """ """
 
     return (

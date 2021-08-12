@@ -4,14 +4,14 @@ import httpx
 
 from ...client import Client
 from ...models.v10_credential_exchange import V10CredentialExchange
-from ...models.v10_credential_offer_request import V10CredentialOfferRequest
+from ...models.v10_credential_free_offer_request import V10CredentialFreeOfferRequest
 from ...types import Response
 
 
 def _get_kwargs(
     *,
     client: Client,
-    json_body: V10CredentialOfferRequest,
+    json_body: V10CredentialFreeOfferRequest,
 ) -> Dict[str, Any]:
     url = "{}/issue-credential/send-offer".format(client.base_url)
 
@@ -49,7 +49,7 @@ def _build_response(*, response: httpx.Response) -> Response[V10CredentialExchan
 def sync_detailed(
     *,
     client: Client,
-    json_body: V10CredentialOfferRequest,
+    json_body: V10CredentialFreeOfferRequest,
 ) -> Response[V10CredentialExchange]:
     kwargs = _get_kwargs(
         client=client,
@@ -66,7 +66,7 @@ def sync_detailed(
 def sync(
     *,
     client: Client,
-    json_body: V10CredentialOfferRequest,
+    json_body: V10CredentialFreeOfferRequest,
 ) -> Optional[V10CredentialExchange]:
     """ """
 
@@ -79,7 +79,7 @@ def sync(
 async def asyncio_detailed(
     *,
     client: Client,
-    json_body: V10CredentialOfferRequest,
+    json_body: V10CredentialFreeOfferRequest,
 ) -> Response[V10CredentialExchange]:
     kwargs = _get_kwargs(
         client=client,
@@ -95,7 +95,7 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Client,
-    json_body: V10CredentialOfferRequest,
+    json_body: V10CredentialFreeOfferRequest,
 ) -> Optional[V10CredentialExchange]:
     """ """
 

@@ -2,7 +2,7 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
-from ..models.invitation_record_invitation import InvitationRecordInvitation
+from ..models.invitation_message import InvitationMessage
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="InvitationRecord")
@@ -14,7 +14,7 @@ class InvitationRecord:
 
     created_at: Union[Unset, str] = UNSET
     invi_msg_id: Union[Unset, str] = UNSET
-    invitation: Union[Unset, InvitationRecordInvitation] = UNSET
+    invitation: Union[Unset, InvitationMessage] = UNSET
     invitation_id: Union[Unset, str] = UNSET
     invitation_url: Union[Unset, str] = UNSET
     state: Union[Unset, str] = UNSET
@@ -65,11 +65,11 @@ class InvitationRecord:
         invi_msg_id = d.pop("invi_msg_id", UNSET)
 
         _invitation = d.pop("invitation", UNSET)
-        invitation: Union[Unset, InvitationRecordInvitation]
+        invitation: Union[Unset, InvitationMessage]
         if isinstance(_invitation, Unset):
             invitation = UNSET
         else:
-            invitation = InvitationRecordInvitation.from_dict(_invitation)
+            invitation = InvitationMessage.from_dict(_invitation)
 
         invitation_id = d.pop("invitation_id", UNSET)
 

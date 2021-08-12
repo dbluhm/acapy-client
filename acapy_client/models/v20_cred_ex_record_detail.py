@@ -3,8 +3,8 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 import attr
 
 from ..models.v20_cred_ex_record import V20CredExRecord
-from ..models.v20_cred_ex_record_dif import V20CredExRecordDIF
 from ..models.v20_cred_ex_record_indy import V20CredExRecordIndy
+from ..models.v20_cred_ex_record_ld_proof import V20CredExRecordLDProof
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="V20CredExRecordDetail")
@@ -15,8 +15,8 @@ class V20CredExRecordDetail:
     """ """
 
     cred_ex_record: Union[Unset, V20CredExRecord] = UNSET
-    dif: Union[Unset, V20CredExRecordDIF] = UNSET
     indy: Union[Unset, V20CredExRecordIndy] = UNSET
+    ld_proof: Union[Unset, V20CredExRecordLDProof] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -24,23 +24,23 @@ class V20CredExRecordDetail:
         if not isinstance(self.cred_ex_record, Unset):
             cred_ex_record = self.cred_ex_record.to_dict()
 
-        dif: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.dif, Unset):
-            dif = self.dif.to_dict()
-
         indy: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.indy, Unset):
             indy = self.indy.to_dict()
+
+        ld_proof: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.ld_proof, Unset):
+            ld_proof = self.ld_proof.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if cred_ex_record is not UNSET:
             field_dict["cred_ex_record"] = cred_ex_record
-        if dif is not UNSET:
-            field_dict["dif"] = dif
         if indy is not UNSET:
             field_dict["indy"] = indy
+        if ld_proof is not UNSET:
+            field_dict["ld_proof"] = ld_proof
 
         return field_dict
 
@@ -54,13 +54,6 @@ class V20CredExRecordDetail:
         else:
             cred_ex_record = V20CredExRecord.from_dict(_cred_ex_record)
 
-        _dif = d.pop("dif", UNSET)
-        dif: Union[Unset, V20CredExRecordDIF]
-        if isinstance(_dif, Unset):
-            dif = UNSET
-        else:
-            dif = V20CredExRecordDIF.from_dict(_dif)
-
         _indy = d.pop("indy", UNSET)
         indy: Union[Unset, V20CredExRecordIndy]
         if isinstance(_indy, Unset):
@@ -68,10 +61,17 @@ class V20CredExRecordDetail:
         else:
             indy = V20CredExRecordIndy.from_dict(_indy)
 
+        _ld_proof = d.pop("ld_proof", UNSET)
+        ld_proof: Union[Unset, V20CredExRecordLDProof]
+        if isinstance(_ld_proof, Unset):
+            ld_proof = UNSET
+        else:
+            ld_proof = V20CredExRecordLDProof.from_dict(_ld_proof)
+
         v20_cred_ex_record_detail = cls(
             cred_ex_record=cred_ex_record,
-            dif=dif,
             indy=indy,
+            ld_proof=ld_proof,
         )
 
         v20_cred_ex_record_detail.additional_properties = d

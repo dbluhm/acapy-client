@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional, Union
 import httpx
 
 from ...client import Client
-from ...models.cred_brief_list import CredBriefList
+from ...models.cred_info_list import CredInfoList
 from ...types import UNSET, Response, Unset
 
 
@@ -35,15 +35,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[CredBriefList]:
+def _parse_response(*, response: httpx.Response) -> Optional[CredInfoList]:
     if response.status_code == 200:
-        response_200 = CredBriefList.from_dict(response.json())
+        response_200 = CredInfoList.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[CredBriefList]:
+def _build_response(*, response: httpx.Response) -> Response[CredInfoList]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -58,7 +58,7 @@ def sync_detailed(
     count: Union[Unset, str] = UNSET,
     start: Union[Unset, str] = UNSET,
     wql: Union[Unset, str] = UNSET,
-) -> Response[CredBriefList]:
+) -> Response[CredInfoList]:
     kwargs = _get_kwargs(
         client=client,
         count=count,
@@ -79,7 +79,7 @@ def sync(
     count: Union[Unset, str] = UNSET,
     start: Union[Unset, str] = UNSET,
     wql: Union[Unset, str] = UNSET,
-) -> Optional[CredBriefList]:
+) -> Optional[CredInfoList]:
     """ """
 
     return sync_detailed(
@@ -96,7 +96,7 @@ async def asyncio_detailed(
     count: Union[Unset, str] = UNSET,
     start: Union[Unset, str] = UNSET,
     wql: Union[Unset, str] = UNSET,
-) -> Response[CredBriefList]:
+) -> Response[CredInfoList]:
     kwargs = _get_kwargs(
         client=client,
         count=count,
@@ -116,7 +116,7 @@ async def asyncio(
     count: Union[Unset, str] = UNSET,
     start: Union[Unset, str] = UNSET,
     wql: Union[Unset, str] = UNSET,
-) -> Optional[CredBriefList]:
+) -> Optional[CredInfoList]:
     """ """
 
     return (

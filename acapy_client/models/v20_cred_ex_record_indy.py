@@ -15,6 +15,7 @@ class V20CredExRecordIndy:
     created_at: Union[Unset, str] = UNSET
     cred_ex_id: Union[Unset, str] = UNSET
     cred_ex_indy_id: Union[Unset, str] = UNSET
+    cred_id_stored: Union[Unset, str] = UNSET
     cred_request_metadata: Union[Unset, V20CredExRecordIndyCredRequestMetadata] = UNSET
     cred_rev_id: Union[Unset, str] = UNSET
     rev_reg_id: Union[Unset, str] = UNSET
@@ -26,6 +27,7 @@ class V20CredExRecordIndy:
         created_at = self.created_at
         cred_ex_id = self.cred_ex_id
         cred_ex_indy_id = self.cred_ex_indy_id
+        cred_id_stored = self.cred_id_stored
         cred_request_metadata: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.cred_request_metadata, Unset):
             cred_request_metadata = self.cred_request_metadata.to_dict()
@@ -44,6 +46,8 @@ class V20CredExRecordIndy:
             field_dict["cred_ex_id"] = cred_ex_id
         if cred_ex_indy_id is not UNSET:
             field_dict["cred_ex_indy_id"] = cred_ex_indy_id
+        if cred_id_stored is not UNSET:
+            field_dict["cred_id_stored"] = cred_id_stored
         if cred_request_metadata is not UNSET:
             field_dict["cred_request_metadata"] = cred_request_metadata
         if cred_rev_id is not UNSET:
@@ -66,6 +70,8 @@ class V20CredExRecordIndy:
 
         cred_ex_indy_id = d.pop("cred_ex_indy_id", UNSET)
 
+        cred_id_stored = d.pop("cred_id_stored", UNSET)
+
         _cred_request_metadata = d.pop("cred_request_metadata", UNSET)
         cred_request_metadata: Union[Unset, V20CredExRecordIndyCredRequestMetadata]
         if isinstance(_cred_request_metadata, Unset):
@@ -85,6 +91,7 @@ class V20CredExRecordIndy:
             created_at=created_at,
             cred_ex_id=cred_ex_id,
             cred_ex_indy_id=cred_ex_indy_id,
+            cred_id_stored=cred_id_stored,
             cred_request_metadata=cred_request_metadata,
             cred_rev_id=cred_rev_id,
             rev_reg_id=rev_reg_id,

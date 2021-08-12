@@ -7,7 +7,7 @@ T = TypeVar("T", bound="KeylistQueryFilterRequestFilter")
 
 @attr.s(auto_attribs=True)
 class KeylistQueryFilterRequestFilter:
-    """Filter for keylist query."""
+    """Filter for keylist query"""
 
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 

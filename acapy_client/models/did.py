@@ -2,6 +2,8 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
+from ..models.did_key_type import DIDKeyType
+from ..models.did_method import DIDMethod
 from ..models.did_posture import DIDPosture
 from ..types import UNSET, Unset
 
@@ -13,12 +15,22 @@ class DID:
     """ """
 
     did: Union[Unset, str] = UNSET
+    key_type: Union[Unset, DIDKeyType] = UNSET
+    method: Union[Unset, DIDMethod] = UNSET
     posture: Union[Unset, DIDPosture] = UNSET
     verkey: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         did = self.did
+        key_type: Union[Unset, str] = UNSET
+        if not isinstance(self.key_type, Unset):
+            key_type = self.key_type.value
+
+        method: Union[Unset, str] = UNSET
+        if not isinstance(self.method, Unset):
+            method = self.method.value
+
         posture: Union[Unset, str] = UNSET
         if not isinstance(self.posture, Unset):
             posture = self.posture.value
@@ -30,6 +42,10 @@ class DID:
         field_dict.update({})
         if did is not UNSET:
             field_dict["did"] = did
+        if key_type is not UNSET:
+            field_dict["key_type"] = key_type
+        if method is not UNSET:
+            field_dict["method"] = method
         if posture is not UNSET:
             field_dict["posture"] = posture
         if verkey is not UNSET:
@@ -42,6 +58,20 @@ class DID:
         d = src_dict.copy()
         did = d.pop("did", UNSET)
 
+        _key_type = d.pop("key_type", UNSET)
+        key_type: Union[Unset, DIDKeyType]
+        if isinstance(_key_type, Unset):
+            key_type = UNSET
+        else:
+            key_type = DIDKeyType(_key_type)
+
+        _method = d.pop("method", UNSET)
+        method: Union[Unset, DIDMethod]
+        if isinstance(_method, Unset):
+            method = UNSET
+        else:
+            method = DIDMethod(_method)
+
         _posture = d.pop("posture", UNSET)
         posture: Union[Unset, DIDPosture]
         if isinstance(_posture, Unset):
@@ -53,6 +83,8 @@ class DID:
 
         did = cls(
             did=did,
+            key_type=key_type,
+            method=method,
             posture=posture,
             verkey=verkey,
         )

@@ -13,7 +13,11 @@ class IndyCredInfo:
     """ """
 
     attrs: Union[Unset, IndyCredInfoAttrs] = UNSET
+    cred_def_id: Union[Unset, str] = UNSET
+    cred_rev_id: Union[Unset, None, str] = UNSET
     referent: Union[Unset, str] = UNSET
+    rev_reg_id: Union[Unset, None, str] = UNSET
+    schema_id: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -21,15 +25,27 @@ class IndyCredInfo:
         if not isinstance(self.attrs, Unset):
             attrs = self.attrs.to_dict()
 
+        cred_def_id = self.cred_def_id
+        cred_rev_id = self.cred_rev_id
         referent = self.referent
+        rev_reg_id = self.rev_reg_id
+        schema_id = self.schema_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if attrs is not UNSET:
             field_dict["attrs"] = attrs
+        if cred_def_id is not UNSET:
+            field_dict["cred_def_id"] = cred_def_id
+        if cred_rev_id is not UNSET:
+            field_dict["cred_rev_id"] = cred_rev_id
         if referent is not UNSET:
             field_dict["referent"] = referent
+        if rev_reg_id is not UNSET:
+            field_dict["rev_reg_id"] = rev_reg_id
+        if schema_id is not UNSET:
+            field_dict["schema_id"] = schema_id
 
         return field_dict
 
@@ -43,11 +59,23 @@ class IndyCredInfo:
         else:
             attrs = IndyCredInfoAttrs.from_dict(_attrs)
 
+        cred_def_id = d.pop("cred_def_id", UNSET)
+
+        cred_rev_id = d.pop("cred_rev_id", UNSET)
+
         referent = d.pop("referent", UNSET)
+
+        rev_reg_id = d.pop("rev_reg_id", UNSET)
+
+        schema_id = d.pop("schema_id", UNSET)
 
         indy_cred_info = cls(
             attrs=attrs,
+            cred_def_id=cred_def_id,
+            cred_rev_id=cred_rev_id,
             referent=referent,
+            rev_reg_id=rev_reg_id,
+            schema_id=schema_id,
         )
 
         indy_cred_info.additional_properties = d

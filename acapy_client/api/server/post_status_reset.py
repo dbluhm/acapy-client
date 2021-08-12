@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 import httpx
 
 from ...client import Client
-from ...models.admin_status import AdminStatus
+from ...models.admin_reset import AdminReset
 from ...types import Response
 
 
@@ -24,15 +24,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[AdminStatus]:
+def _parse_response(*, response: httpx.Response) -> Optional[AdminReset]:
     if response.status_code == 200:
-        response_200 = AdminStatus.from_dict(response.json())
+        response_200 = AdminReset.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[AdminStatus]:
+def _build_response(*, response: httpx.Response) -> Response[AdminReset]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -44,7 +44,7 @@ def _build_response(*, response: httpx.Response) -> Response[AdminStatus]:
 def sync_detailed(
     *,
     client: Client,
-) -> Response[AdminStatus]:
+) -> Response[AdminReset]:
     kwargs = _get_kwargs(
         client=client,
     )
@@ -59,7 +59,7 @@ def sync_detailed(
 def sync(
     *,
     client: Client,
-) -> Optional[AdminStatus]:
+) -> Optional[AdminReset]:
     """ """
 
     return sync_detailed(
@@ -70,7 +70,7 @@ def sync(
 async def asyncio_detailed(
     *,
     client: Client,
-) -> Response[AdminStatus]:
+) -> Response[AdminReset]:
     kwargs = _get_kwargs(
         client=client,
     )
@@ -84,7 +84,7 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Client,
-) -> Optional[AdminStatus]:
+) -> Optional[AdminReset]:
     """ """
 
     return (

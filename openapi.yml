@@ -253,15 +253,15 @@ paths:
         schema:
           type: string
           enum:
-          - response
-          - invitation
-          - init
-          - abandoned
           - completed
-          - request
-          - active
           - start
+          - response
+          - request
           - error
+          - init
+          - invitation
+          - active
+          - abandoned
       - name: their_did
         in: query
         description: Their DID
@@ -552,6 +552,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConnectionMetadata'
+      operationId: get_metadata
     post:
       tags:
       - connection
@@ -577,6 +578,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConnectionMetadata'
       x-codegen-request-body-name: body
+      operationId: set_metadata
   /connections/{conn_id}/send-message:
     post:
       tags:
@@ -828,6 +830,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VCRecord'
+      operationId: get_w3c_credential
     delete:
       tags:
       - credentials
@@ -846,6 +849,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HolderModuleResponse'
+      operationId: delete_w3c_credential
   /credential/{credential_id}:
     get:
       tags:
@@ -952,6 +956,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/VCRecordList'
       x-codegen-request-body-name: body
+      operationId: get_w3c_credentials
   /didexchange/create-request:
     post:
       tags:
@@ -1134,6 +1139,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20CredExRecord'
       x-codegen-request-body-name: body
+      operationId: create_credential
   /issue-credential-2.0/records:
     get:
       tags:
@@ -1182,6 +1188,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V20CredExRecordListResult'
+      operationId: get_records
   /issue-credential-2.0/records/{cred_ex_id}:
     get:
       tags:
@@ -1202,6 +1209,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V20CredExRecordDetail'
+      operationId: get_record
     delete:
       tags:
       - issue-credential v2.0
@@ -1221,6 +1229,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V20IssueCredentialModuleResponse'
+      operationId: delete_record
   /issue-credential-2.0/records/{cred_ex_id}/issue:
     post:
       tags:
@@ -1248,6 +1257,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20CredExRecordDetail'
       x-codegen-request-body-name: body
+      operationId: issue_credential
   /issue-credential-2.0/records/{cred_ex_id}/problem-report:
     post:
       tags:
@@ -1275,6 +1285,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20IssueCredentialModuleResponse'
       x-codegen-request-body-name: body
+      operationId: report_problem
   /issue-credential-2.0/records/{cred_ex_id}/send-offer:
     post:
       tags:
@@ -1302,6 +1313,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20CredExRecord'
       x-codegen-request-body-name: body
+      operationId: send_offer
   /issue-credential-2.0/records/{cred_ex_id}/send-request:
     post:
       tags:
@@ -1329,6 +1341,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20CredExRecord'
       x-codegen-request-body-name: body
+      operationId: send_request
   /issue-credential-2.0/records/{cred_ex_id}/store:
     post:
       tags:
@@ -1356,6 +1369,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20CredExRecordDetail'
       x-codegen-request-body-name: body
+      operationId: store_credential
   /issue-credential-2.0/send:
     post:
       tags:
@@ -1375,6 +1389,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20CredExRecord'
       x-codegen-request-body-name: body
+      operationId: issue_credential_automated
   /issue-credential-2.0/send-offer:
     post:
       tags:
@@ -1394,6 +1409,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20CredExRecord'
       x-codegen-request-body-name: body
+      operationId: send_offer_free
   /issue-credential-2.0/send-proposal:
     post:
       tags:
@@ -1413,6 +1429,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20CredExRecord'
       x-codegen-request-body-name: body
+      operationId: send_proposal
   /issue-credential-2.0/send-request:
     post:
       tags:
@@ -1433,6 +1450,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20CredExRecord'
       x-codegen-request-body-name: body
+      operationId: send_request_free
   /issue-credential/create:
     post:
       tags:
@@ -2324,6 +2342,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20PresExRecord'
       x-codegen-request-body-name: body
+      operationId: create_proof_request
   /present-proof-2.0/records:
     get:
       tags:
@@ -2340,6 +2359,7 @@ paths:
         in: query
         description: Role assigned in presentation exchange
         schema:
+          title: present_proof_role_schema
           type: string
           enum:
           - prover
@@ -2348,6 +2368,7 @@ paths:
         in: query
         description: Presentation exchange state
         schema:
+          title: present_proof_state_schema
           type: string
           enum:
           - proposal-sent
@@ -2371,6 +2392,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V20PresExRecordList'
+      operationId: get_records
   /present-proof-2.0/records/{pres_ex_id}:
     get:
       tags:
@@ -2391,6 +2413,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V20PresExRecord'
+      operationId: get_record
     delete:
       tags:
       - present-proof v2.0
@@ -2410,6 +2433,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V20PresentProofModuleResponse'
+      operationId: delete_record
   /present-proof-2.0/records/{pres_ex_id}/credentials:
     get:
       tags:
@@ -2455,6 +2479,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/IndyCredPrecis'
+      operationId: get_matching_credentials
   /present-proof-2.0/records/{pres_ex_id}/problem-report:
     post:
       tags:
@@ -2482,6 +2507,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20PresentProofModuleResponse'
       x-codegen-request-body-name: body
+      operationId: report_problem
   /present-proof-2.0/records/{pres_ex_id}/send-presentation:
     post:
       tags:
@@ -2509,6 +2535,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20PresExRecord'
       x-codegen-request-body-name: body
+      operationId: send_presentation
   /present-proof-2.0/records/{pres_ex_id}/send-request:
     post:
       tags:
@@ -2536,6 +2563,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20PresExRecord'
       x-codegen-request-body-name: body
+      operationId: send_request
   /present-proof-2.0/records/{pres_ex_id}/verify-presentation:
     post:
       tags:
@@ -2556,6 +2584,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V20PresExRecord'
+      operationId: verify_presentation
   /present-proof-2.0/send-proposal:
     post:
       tags:
@@ -2575,6 +2604,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20PresExRecord'
       x-codegen-request-body-name: body
+      operationId: send_proposal
   /present-proof-2.0/send-request:
     post:
       tags:
@@ -2594,6 +2624,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/V20PresExRecord'
       x-codegen-request-body-name: body
+      operationId: send_request_free
   /present-proof/create-request:
     post:
       tags:
@@ -3023,6 +3054,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TxnOrPublishRevocationsResult'
       x-codegen-request-body-name: body
+      operationId: publish_revocations
   /revocation/registries/created:
     get:
       tags:
@@ -3270,6 +3302,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RevocationModuleResponse'
       x-codegen-request-body-name: body
+      operationId: revoke_credential
   /schemas:
     post:
       tags:
@@ -3932,7 +3965,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Hint regarding last modification datetime, in ISO-8601 format
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         mime-type:
           type: string
           description: MIME type
@@ -4097,27 +4130,13 @@ components:
           description: Connection protocol used
           example: connections/1.0
           enum:
-          - c
-          - o
-          - n
-          - e
-          - t
-          - i
-          - s
-          - /
-          - '1'
-          - .
-          - '0'
-          - d
-          - x
-          - h
-          - a
-          - g
+          - connections/1.0
+          - didexchange/1.0
         created_at:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         error_msg:
           type: string
           description: Error message
@@ -4196,7 +4215,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
     ConnectionInvitation:
       type: object
       properties:
@@ -4538,7 +4557,9 @@ components:
           - https://www.w3.org/2018/credentials/v1
           - https://www.w3.org/2018/credentials/examples/v1
           items:
-            type: object
+            anyOf:
+            - type: object
+            - type: string
         credentialSubject:
           type: object
           example: ''
@@ -4557,7 +4578,9 @@ components:
           description: The issuance date
           example: 2010-01-01 19:23:24+00:00
         issuer:
-          type: object
+          oneOf:
+          - type: object
+          - type: string
           description: The JSON-LD Verifiable Credential Issuer. Either string of
             object with id field.
           example: did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSwuBV8xRoAnwWsdvktH
@@ -5023,7 +5046,14 @@ components:
       type: object
       properties:
         const:
-          type: object
+          anyOf:
+            - type: string
+            - type: number
+            - type: integer
+            - type: boolean
+            - type: array
+              items: {}
+            - type: object
           description: Const
         enum:
           type: array
@@ -5418,14 +5448,14 @@ components:
           type: integer
           description: Earliest time of interest in non-revocation interval
           format: int32
-          example: 1628781383
+          example: 1627674608
         to:
           maximum: 18446744073709551615
           minimum: 0
           type: integer
           description: Latest time of interest in non-revocation interval
           format: int32
-          example: 1628781383
+          example: 1627674608
     IndyPresAttrSpec:
       required:
       - name
@@ -5588,7 +5618,7 @@ components:
           description: Timestamp epoch
           format: int32
           nullable: true
-          example: 1628781383
+          example: 1627674608
     IndyProofProof:
       type: object
       properties:
@@ -5668,14 +5698,14 @@ components:
           type: integer
           description: Earliest time of interest in non-revocation interval
           format: int32
-          example: 1628781383
+          example: 1627674608
         to:
           maximum: 18446744073709551615
           minimum: 0
           type: integer
           description: Latest time of interest in non-revocation interval
           format: int32
-          example: 1628781383
+          example: 1627674608
     IndyProofReqPredSpec:
       required:
       - name
@@ -5725,14 +5755,14 @@ components:
           type: integer
           description: Earliest time of interest in non-revocation interval
           format: int32
-          example: 1628781383
+          example: 1627674608
         to:
           maximum: 18446744073709551615
           minimum: 0
           type: integer
           description: Latest time of interest in non-revocation interval
           format: int32
-          example: 1628781383
+          example: 1627674608
     IndyProofRequest:
       type: object
       properties:
@@ -5774,14 +5804,14 @@ components:
           type: integer
           description: Earliest time of interest in non-revocation interval
           format: int32
-          example: 1628781383
+          example: 1627674608
         to:
           maximum: 18446744073709551615
           minimum: 0
           type: integer
           description: Latest time of interest in non-revocation interval
           format: int32
-          example: 1628781383
+          example: 1627674608
     IndyProofRequestedProof:
       type: object
       properties:
@@ -5873,7 +5903,7 @@ components:
           type: integer
           description: Epoch timestamp of interest for non-revocation proof
           format: int32
-          example: 1628781383
+          example: 1627674608
     IndyRevRegDef:
       type: object
       properties:
@@ -6091,7 +6121,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         invi_msg_id:
           type: string
           description: Invitation message identifier
@@ -6120,7 +6150,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
     InvitationResult:
       type: object
       properties:
@@ -6143,7 +6173,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         cred_def_id:
           pattern: ^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
           type: string
@@ -6175,7 +6205,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
     IssuerRevRegRecord:
       type: object
       properties:
@@ -6183,7 +6213,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         cred_def_id:
           pattern: ^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
           type: string
@@ -6257,7 +6287,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
     Keylist:
       type: object
       properties:
@@ -6403,7 +6433,7 @@ components:
           type: string
           description: The date and time of the proof (with a maximum accuracy in
             seconds). Defaults to current system time
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         credentialStatus:
           type: object
           description: The credential status mechanism to use for the credential.
@@ -6445,7 +6475,7 @@ components:
           type: string
           description: The string value of an ISO8601 combined date and time string
             generated by the Signature Algorithm
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         domain:
           pattern: \w+:(\/?\/?)[^\s]+
           type: string
@@ -6557,7 +6587,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         endpoint:
           type: string
         mediation_id:
@@ -6586,7 +6616,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
     Menu:
       required:
       - options
@@ -6994,7 +7024,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         recipient_key:
           type: string
         record_id:
@@ -7009,7 +7039,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         wallet_id:
           type: string
     Schema:
@@ -7187,7 +7217,8 @@ components:
         from_nested:
           type: array
           items:
-            $ref: '#/components/schemas/SubmissionRequirements'
+            type: object
+            #$ref: '#/components/schemas/SubmissionRequirements'
         max:
           type: integer
           description: Max Value
@@ -7229,7 +7260,7 @@ components:
           minimum: 0
           type: integer
           format: int32
-          example: 1628781383
+          example: 1627674608
     TAAInfo:
       type: object
       properties:
@@ -7295,7 +7326,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         endorser_write_txn:
           type: boolean
           description: If True, Endorser will write the transaction after endorsing
@@ -7370,7 +7401,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
     TxnOrCredentialDefinitionSendResult:
       type: object
       properties:
@@ -7493,7 +7524,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         credential:
           type: object
           description: Credential as stored
@@ -7589,7 +7620,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
     V10CredentialExchangeListResult:
       type: object
       properties:
@@ -7787,7 +7818,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         error_msg:
           type: string
           description: Error message
@@ -7845,7 +7876,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         verified:
           type: string
           description: 'Whether presentation is verified: true or false'
@@ -7975,7 +8006,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         cred_ex_id:
           type: string
           description: Credential exchange identifier
@@ -8052,7 +8083,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
     V20CredExRecordByFormat:
       type: object
       properties:
@@ -8087,7 +8118,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         cred_ex_id:
           type: string
           description: Corresponding v2.0 credential exchange record identifier
@@ -8122,7 +8153,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
     V20CredExRecordLDProof:
       type: object
       properties:
@@ -8130,7 +8161,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         cred_ex_id:
           type: string
           description: Corresponding v2.0 credential exchange record identifier
@@ -8151,7 +8182,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
     V20CredExRecordListResult:
       type: object
       properties:
@@ -8582,7 +8613,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of record creation
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         error_msg:
           type: string
           description: Error message
@@ -8643,7 +8674,7 @@ components:
           pattern: ^\d{4}-\d\d-\d\d[T ]\d\d:\d\d(?:\:(?:\d\d(?:\.\d{1,6})?))?(?:[+-]\d\d:?\d\d|Z|)$
           type: string
           description: Time of last record update
-          example: 2021-08-12 15:16:23+00:00
+          example: 2021-07-30 19:50:08+00:00
         verified:
           type: string
           description: 'Whether presentation is verified: ''true'' or ''false'''

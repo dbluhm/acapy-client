@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 import httpx
 
 from ...client import Client
-from ...models.cred_brief import CredBrief
+from ...models.indy_cred_info import IndyCredInfo
 from ...types import Response
 
 
@@ -25,15 +25,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[CredBrief]:
+def _parse_response(*, response: httpx.Response) -> Optional[IndyCredInfo]:
     if response.status_code == 200:
-        response_200 = CredBrief.from_dict(response.json())
+        response_200 = IndyCredInfo.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[CredBrief]:
+def _build_response(*, response: httpx.Response) -> Response[IndyCredInfo]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -46,7 +46,7 @@ def sync_detailed(
     *,
     client: Client,
     credential_id: str,
-) -> Response[CredBrief]:
+) -> Response[IndyCredInfo]:
     kwargs = _get_kwargs(
         client=client,
         credential_id=credential_id,
@@ -63,7 +63,7 @@ def sync(
     *,
     client: Client,
     credential_id: str,
-) -> Optional[CredBrief]:
+) -> Optional[IndyCredInfo]:
     """ """
 
     return sync_detailed(
@@ -76,7 +76,7 @@ async def asyncio_detailed(
     *,
     client: Client,
     credential_id: str,
-) -> Response[CredBrief]:
+) -> Response[IndyCredInfo]:
     kwargs = _get_kwargs(
         client=client,
         credential_id=credential_id,
@@ -92,7 +92,7 @@ async def asyncio(
     *,
     client: Client,
     credential_id: str,
-) -> Optional[CredBrief]:
+) -> Optional[IndyCredInfo]:
     """ """
 
     return (

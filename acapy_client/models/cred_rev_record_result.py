@@ -1,6 +1,9 @@
-from typing import Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
+
+from ..models.issuer_cred_rev_record import IssuerCredRevRecord
+from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CredRevRecordResult")
 
@@ -9,20 +12,35 @@ T = TypeVar("T", bound="CredRevRecordResult")
 class CredRevRecordResult:
     """ """
 
+    result: Union[Unset, IssuerCredRevRecord] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        result: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.result, Unset):
+            result = self.result.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if result is not UNSET:
+            field_dict["result"] = result
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        cred_rev_record_result = cls()
+        _result = d.pop("result", UNSET)
+        result: Union[Unset, IssuerCredRevRecord]
+        if isinstance(_result, Unset):
+            result = UNSET
+        else:
+            result = IssuerCredRevRecord.from_dict(_result)
+
+        cred_rev_record_result = cls(
+            result=result,
+        )
 
         cred_rev_record_result.additional_properties = d
         return cred_rev_record_result

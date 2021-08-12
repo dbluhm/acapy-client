@@ -2,13 +2,11 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
+from ..models.indy_proof import IndyProof
+from ..models.indy_proof_request import IndyProofRequest
+from ..models.presentation_proposal import PresentationProposal
+from ..models.presentation_request import PresentationRequest
 from ..models.v10_presentation_exchange_initiator import V10PresentationExchangeInitiator
-from ..models.v10_presentation_exchange_presentation import V10PresentationExchangePresentation
-from ..models.v10_presentation_exchange_presentation_proposal_dict import (
-    V10PresentationExchangePresentationProposalDict,
-)
-from ..models.v10_presentation_exchange_presentation_request import V10PresentationExchangePresentationRequest
-from ..models.v10_presentation_exchange_presentation_request_dict import V10PresentationExchangePresentationRequestDict
 from ..models.v10_presentation_exchange_role import V10PresentationExchangeRole
 from ..models.v10_presentation_exchange_verified import V10PresentationExchangeVerified
 from ..types import UNSET, Unset
@@ -25,11 +23,11 @@ class V10PresentationExchange:
     created_at: Union[Unset, str] = UNSET
     error_msg: Union[Unset, str] = UNSET
     initiator: Union[Unset, V10PresentationExchangeInitiator] = UNSET
-    presentation: Union[Unset, V10PresentationExchangePresentation] = UNSET
+    presentation: Union[Unset, IndyProof] = UNSET
     presentation_exchange_id: Union[Unset, str] = UNSET
-    presentation_proposal_dict: Union[Unset, V10PresentationExchangePresentationProposalDict] = UNSET
-    presentation_request: Union[Unset, V10PresentationExchangePresentationRequest] = UNSET
-    presentation_request_dict: Union[Unset, V10PresentationExchangePresentationRequestDict] = UNSET
+    presentation_proposal_dict: Union[Unset, PresentationProposal] = UNSET
+    presentation_request: Union[Unset, IndyProofRequest] = UNSET
+    presentation_request_dict: Union[Unset, PresentationRequest] = UNSET
     role: Union[Unset, V10PresentationExchangeRole] = UNSET
     state: Union[Unset, str] = UNSET
     thread_id: Union[Unset, str] = UNSET
@@ -133,38 +131,34 @@ class V10PresentationExchange:
             initiator = V10PresentationExchangeInitiator(_initiator)
 
         _presentation = d.pop("presentation", UNSET)
-        presentation: Union[Unset, V10PresentationExchangePresentation]
+        presentation: Union[Unset, IndyProof]
         if isinstance(_presentation, Unset):
             presentation = UNSET
         else:
-            presentation = V10PresentationExchangePresentation.from_dict(_presentation)
+            presentation = IndyProof.from_dict(_presentation)
 
         presentation_exchange_id = d.pop("presentation_exchange_id", UNSET)
 
         _presentation_proposal_dict = d.pop("presentation_proposal_dict", UNSET)
-        presentation_proposal_dict: Union[Unset, V10PresentationExchangePresentationProposalDict]
+        presentation_proposal_dict: Union[Unset, PresentationProposal]
         if isinstance(_presentation_proposal_dict, Unset):
             presentation_proposal_dict = UNSET
         else:
-            presentation_proposal_dict = V10PresentationExchangePresentationProposalDict.from_dict(
-                _presentation_proposal_dict
-            )
+            presentation_proposal_dict = PresentationProposal.from_dict(_presentation_proposal_dict)
 
         _presentation_request = d.pop("presentation_request", UNSET)
-        presentation_request: Union[Unset, V10PresentationExchangePresentationRequest]
+        presentation_request: Union[Unset, IndyProofRequest]
         if isinstance(_presentation_request, Unset):
             presentation_request = UNSET
         else:
-            presentation_request = V10PresentationExchangePresentationRequest.from_dict(_presentation_request)
+            presentation_request = IndyProofRequest.from_dict(_presentation_request)
 
         _presentation_request_dict = d.pop("presentation_request_dict", UNSET)
-        presentation_request_dict: Union[Unset, V10PresentationExchangePresentationRequestDict]
+        presentation_request_dict: Union[Unset, PresentationRequest]
         if isinstance(_presentation_request_dict, Unset):
             presentation_request_dict = UNSET
         else:
-            presentation_request_dict = V10PresentationExchangePresentationRequestDict.from_dict(
-                _presentation_request_dict
-            )
+            presentation_request_dict = PresentationRequest.from_dict(_presentation_request_dict)
 
         _role = d.pop("role", UNSET)
         role: Union[Unset, V10PresentationExchangeRole]
