@@ -3331,7 +3331,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TxnOrSchemaSendResult'
+                oneOf:
+                  - $ref: '#/components/schemas/TxnOrSchemaSendResult'
+                  - $ref: '#/components/schemas/SchemaSendResult'
       x-codegen-request-body-name: body
       operationId: publish_schema
   /schemas/created:

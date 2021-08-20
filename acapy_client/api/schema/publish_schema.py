@@ -4,6 +4,7 @@ import httpx
 
 from ...client import Client
 from ...models.schema_send_request import SchemaSendRequest
+from ...models.schema_send_result import SchemaSendResult
 from ...models.txn_or_schema_send_result import TxnOrSchemaSendResult
 from ...types import UNSET, Response, Unset
 
@@ -38,15 +39,31 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[TxnOrSchemaSendResult]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[SchemaSendResult, TxnOrSchemaSendResult]]:
     if response.status_code == 200:
-        response_200 = TxnOrSchemaSendResult.from_dict(response.json())
+
+        def _parse_response_200(data: object) -> Union[SchemaSendResult, TxnOrSchemaSendResult]:
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                response_200_type_0 = TxnOrSchemaSendResult.from_dict(data)
+
+                return response_200_type_0
+            except:  # noqa: E722
+                pass
+            if not isinstance(data, dict):
+                raise TypeError()
+            response_200_type_1 = SchemaSendResult.from_dict(data)
+
+            return response_200_type_1
+
+        response_200 = _parse_response_200(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[TxnOrSchemaSendResult]:
+def _build_response(*, response: httpx.Response) -> Response[Union[SchemaSendResult, TxnOrSchemaSendResult]]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -61,7 +78,7 @@ def sync_detailed(
     json_body: SchemaSendRequest,
     conn_id: Union[Unset, str] = UNSET,
     create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Response[TxnOrSchemaSendResult]:
+) -> Response[Union[SchemaSendResult, TxnOrSchemaSendResult]]:
     kwargs = _get_kwargs(
         client=client,
         json_body=json_body,
@@ -82,7 +99,7 @@ def sync(
     json_body: SchemaSendRequest,
     conn_id: Union[Unset, str] = UNSET,
     create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Optional[TxnOrSchemaSendResult]:
+) -> Optional[Union[SchemaSendResult, TxnOrSchemaSendResult]]:
     """ """
 
     return sync_detailed(
@@ -99,7 +116,7 @@ async def asyncio_detailed(
     json_body: SchemaSendRequest,
     conn_id: Union[Unset, str] = UNSET,
     create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Response[TxnOrSchemaSendResult]:
+) -> Response[Union[SchemaSendResult, TxnOrSchemaSendResult]]:
     kwargs = _get_kwargs(
         client=client,
         json_body=json_body,
@@ -119,7 +136,7 @@ async def asyncio(
     json_body: SchemaSendRequest,
     conn_id: Union[Unset, str] = UNSET,
     create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Optional[TxnOrSchemaSendResult]:
+) -> Optional[Union[SchemaSendResult, TxnOrSchemaSendResult]]:
     """ """
 
     return (
