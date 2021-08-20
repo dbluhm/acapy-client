@@ -6850,8 +6850,6 @@ components:
             $ref: '#/components/schemas/AttachDecorator'
     PublishRevocations:
       type: object
-      required:
-        - rrid2crid
       properties:
         rrid2crid:
           type: object

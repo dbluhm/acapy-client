@@ -1,8 +1,9 @@
-from typing import Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
 from ..models.publish_revocations_rrid_2_crid import PublishRevocationsRrid2Crid
+from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PublishRevocations")
 
@@ -11,26 +12,31 @@ T = TypeVar("T", bound="PublishRevocations")
 class PublishRevocations:
     """ """
 
-    rrid2crid: PublishRevocationsRrid2Crid
+    rrid2crid: Union[Unset, PublishRevocationsRrid2Crid] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        rrid2crid = self.rrid2crid.to_dict()
+        rrid2crid: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.rrid2crid, Unset):
+            rrid2crid = self.rrid2crid.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "rrid2crid": rrid2crid,
-            }
-        )
+        field_dict.update({})
+        if rrid2crid is not UNSET:
+            field_dict["rrid2crid"] = rrid2crid
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        rrid2crid = PublishRevocationsRrid2Crid.from_dict(d.pop("rrid2crid"))
+        _rrid2crid = d.pop("rrid2crid", UNSET)
+        rrid2crid: Union[Unset, PublishRevocationsRrid2Crid]
+        if isinstance(_rrid2crid, Unset):
+            rrid2crid = UNSET
+        else:
+            rrid2crid = PublishRevocationsRrid2Crid.from_dict(_rrid2crid)
 
         publish_revocations = cls(
             rrid2crid=rrid2crid,
