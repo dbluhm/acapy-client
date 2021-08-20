@@ -3,6 +3,7 @@ from typing import Any, Dict, Optional, Union
 import httpx
 
 from ...client import Client
+from ...models.rev_reg_result import RevRegResult
 from ...models.txn_or_rev_reg_result import TxnOrRevRegResult
 from ...types import UNSET, Response, Unset
 
@@ -34,15 +35,31 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[TxnOrRevRegResult]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[RevRegResult, TxnOrRevRegResult]]:
     if response.status_code == 200:
-        response_200 = TxnOrRevRegResult.from_dict(response.json())
+
+        def _parse_response_200(data: object) -> Union[RevRegResult, TxnOrRevRegResult]:
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                response_200_type_0 = RevRegResult.from_dict(data)
+
+                return response_200_type_0
+            except:  # noqa: E722
+                pass
+            if not isinstance(data, dict):
+                raise TypeError()
+            response_200_type_1 = TxnOrRevRegResult.from_dict(data)
+
+            return response_200_type_1
+
+        response_200 = _parse_response_200(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[TxnOrRevRegResult]:
+def _build_response(*, response: httpx.Response) -> Response[Union[RevRegResult, TxnOrRevRegResult]]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -57,7 +74,7 @@ def sync_detailed(
     rev_reg_id: str,
     conn_id: Union[Unset, str] = UNSET,
     create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Response[TxnOrRevRegResult]:
+) -> Response[Union[RevRegResult, TxnOrRevRegResult]]:
     kwargs = _get_kwargs(
         client=client,
         rev_reg_id=rev_reg_id,
@@ -78,7 +95,7 @@ def sync(
     rev_reg_id: str,
     conn_id: Union[Unset, str] = UNSET,
     create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Optional[TxnOrRevRegResult]:
+) -> Optional[Union[RevRegResult, TxnOrRevRegResult]]:
     """ """
 
     return sync_detailed(
@@ -95,7 +112,7 @@ async def asyncio_detailed(
     rev_reg_id: str,
     conn_id: Union[Unset, str] = UNSET,
     create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Response[TxnOrRevRegResult]:
+) -> Response[Union[RevRegResult, TxnOrRevRegResult]]:
     kwargs = _get_kwargs(
         client=client,
         rev_reg_id=rev_reg_id,
@@ -115,7 +132,7 @@ async def asyncio(
     rev_reg_id: str,
     conn_id: Union[Unset, str] = UNSET,
     create_transaction_for_endorser: Union[Unset, bool] = UNSET,
-) -> Optional[TxnOrRevRegResult]:
+) -> Optional[Union[RevRegResult, TxnOrRevRegResult]]:
     """ """
 
     return (

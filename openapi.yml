@@ -690,7 +690,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TxnOrCredentialDefinitionSendResult'
+                oneOf:
+                  - $ref: '#/components/schemas/CredentialDefinitionSendResult'
+                  - $ref: '#/components/schemas/TxnOrCredentialDefinitionSendResult'
       x-codegen-request-body-name: body
       operationId: publish_cred_def
   /credential-definitions/created:
@@ -3052,7 +3054,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TxnOrPublishRevocationsResult'
+                oneOf:
+                  - $ref: '#/components/schemas/PublishRevocations'
+                  - $ref: '#/components/schemas/TxnOrPublishRevocationsResult'
       x-codegen-request-body-name: body
       operationId: publish_revocations
   /revocation/registries/created:
@@ -3160,7 +3164,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TxnOrRevRegResult'
+                oneOf:
+                  - $ref: '#/components/schemas/RevRegResult'
+                  - $ref: '#/components/schemas/TxnOrRevRegResult'
   /revocation/registry/{rev_reg_id}/entry:
     post:
       tags:
@@ -3332,8 +3338,8 @@ paths:
             application/json:
               schema:
                 oneOf:
-                  - $ref: '#/components/schemas/TxnOrSchemaSendResult'
                   - $ref: '#/components/schemas/SchemaSendResult'
+                  - $ref: '#/components/schemas/TxnOrSchemaSendResult'
       x-codegen-request-body-name: body
       operationId: publish_schema
   /schemas/created:
@@ -4664,6 +4670,8 @@ components:
           example: default
     CredentialDefinitionSendResult:
       type: object
+      required:
+        - credential_definition_id
       properties:
         credential_definition_id:
           pattern: ^([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}):3:CL:(([1-9][0-9]*)|([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21,22}:2:.+:[0-9.]+)):(.+)?$
@@ -6842,6 +6850,8 @@ components:
             $ref: '#/components/schemas/AttachDecorator'
     PublishRevocations:
       type: object
+      required:
+        - rrid2crid
       properties:
         rrid2crid:
           type: object
@@ -6968,6 +6978,8 @@ components:
           example: 0
     RevRegResult:
       type: object
+      required:
+        - result
       properties:
         result:
           $ref: '#/components/schemas/IssuerRevRegRecord'
@@ -7118,7 +7130,8 @@ components:
           example: '1.0'
     SchemaSendResult:
       required:
-      - schema_id
+        - schema_id
+        - schema
       type: object
       properties:
         schema:
@@ -7407,6 +7420,7 @@ components:
           example: 2021-07-30 19:50:08+00:00
     TxnOrCredentialDefinitionSendResult:
       type: object
+      additionalProperties: false
       properties:
         sent:
           $ref: '#/components/schemas/CredentialDefinitionSendResult'
@@ -7417,6 +7431,7 @@ components:
           - $ref: '#/components/schemas/TransactionRecord'
     TxnOrPublishRevocationsResult:
       type: object
+      additionalProperties: false
       properties:
         sent:
           $ref: '#/components/schemas/PublishRevocations'
@@ -7427,6 +7442,7 @@ components:
           - $ref: '#/components/schemas/TransactionRecord'
     TxnOrRevRegResult:
       type: object
+      additionalProperties: false
       properties:
         sent:
           $ref: '#/components/schemas/RevRegResult'

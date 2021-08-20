@@ -46,14 +46,14 @@ def _parse_response(*, response: httpx.Response) -> Optional[Union[SchemaSendRes
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
-                response_200_type_0 = TxnOrSchemaSendResult.from_dict(data)
+                response_200_type_0 = SchemaSendResult.from_dict(data)
 
                 return response_200_type_0
             except:  # noqa: E722
                 pass
             if not isinstance(data, dict):
                 raise TypeError()
-            response_200_type_1 = SchemaSendResult.from_dict(data)
+            response_200_type_1 = TxnOrSchemaSendResult.from_dict(data)
 
             return response_200_type_1
 
