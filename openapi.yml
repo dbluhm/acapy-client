@@ -7437,6 +7437,7 @@ components:
           - $ref: '#/components/schemas/TransactionRecord'
     TxnOrSchemaSendResult:
       type: object
+      additionalProperties: false
       properties:
         sent:
           type: object
